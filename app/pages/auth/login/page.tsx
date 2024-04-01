@@ -76,7 +76,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            <Link href="/pages/dashboard/maid/" component="a">
+            <Link href="/pages/dashboard/maid/">
               <Button variant="contained" color="primary" style={{ borderRadius: '50%', minWidth: '64px', height: '64px', margin: '0 8px' }}>
                 <AdbIcon/>
               </Button>
