@@ -27,7 +27,7 @@ export default function SignIn() {
   // };
 
   return (
-    <div className='bg-blue-100'>
+    <div>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
