@@ -27,6 +27,7 @@ export default function SignIn() {
   // };
 
   return (
+    <div className='bg-blue-100'>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
@@ -96,5 +97,6 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
+    </div>
   );
 }
