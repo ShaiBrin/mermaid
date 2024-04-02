@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navigation from "@/app/components/Dashboard/navigation";
-import DropdownBox from "../components/Dashboard/content/dropdown";
-import Content from "../components/Dashboard/content";
-
-const inter = Inter({ subsets: ["latin"] });
+import Navigation from "@/app/components/maid/navigation";
+import Dashboard from "../components/maid/leftside/dashboardMaid";
+import Maid from "../components/maid";
+ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,10 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body className={inter.className}>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
-      <Navigation/>
-      <Content/>
-      </div>
+      <>
+      <Maid/>
+      </>
       {children}
     </body>
   </html>
