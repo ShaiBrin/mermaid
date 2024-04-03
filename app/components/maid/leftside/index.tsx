@@ -8,9 +8,7 @@ import DropdownBoxMaid from "./dashboardMaid/dropdown/DropdownBoxMaid";
 const LeftSide = () => {
     return (
         <>
-            {/* <div className="flex-initial w-1/2 p-5">  */}
-                <DropdownBoxMaid />
-            {/* </div> */}
+            <DropdownBoxMaid />
         </>
     );
   }
