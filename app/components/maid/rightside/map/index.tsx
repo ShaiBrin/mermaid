@@ -6,9 +6,9 @@ import MyGoogleMap from "./googlemap";
 
 const RightSide = () => {
     return (
-      <>
+      <div className="h-full">
       < MyGoogleMap/>
-      </>
+      </div>
         // <div className="flex h-screen">
             // <div className="flex-initial w-1/2 p-5"> 
                 // < MyGoogleMap/>
