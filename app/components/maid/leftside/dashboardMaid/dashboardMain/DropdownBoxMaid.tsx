@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme } from '@mui/material';
+import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
+import router from 'next/router';
 
-const DropdownBoxMaid = () => {
-  const [selectedDropdown, setSelectedDropdown] = useState('option1'); // Assume option1 is selected by default or manage as needed
+const DropdownBoxMaid = ({ onNavigate }: { onNavigate: any }) => {
   const [autocompleteOptions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const theme = useTheme();
-
-  const handleDropdownChange = (event) => {
-    setSelectedDropdown(event.target.value);
-  };
 
   const handleAutocompleteChange = (event, newValue) => {
     setSelectedOptions(newValue);
@@ -26,16 +22,17 @@ const DropdownBoxMaid = () => {
       <Grid item xs={12}>
         <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
           {/* First Dropdown */}
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Dropdown 1</InputLabel>
-            <Select
-              value={selectedDropdown}
-              label="Dropdown 1"
-              onChange={handleDropdownChange}
-            >
-              <MenuItem value="option1">Option 1 Value</MenuItem>
-            </Select>
-          </FormControl>
+          {/* Button styled as a dropdown */}
+          {/* <Link href="/maid/pickup"> */}
+          <Button
+            variant="outlined"
+            fullWidth
+            onClick={() => onNavigate('/maid/pickup')}
+            sx={{ marginBottom: 2 }} // Additional styling
+          >
+            Go to Dashboard
+          </Button>
+          {/* </Link> */}
 
           {/* Second Dropdown with Autocomplete */}
           <Autocomplete
