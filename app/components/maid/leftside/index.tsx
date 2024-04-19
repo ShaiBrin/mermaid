@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import DropdownBoxMaid from "./dashboardMaid/dashboardMain/DropdownBoxMaid";
-import DropdownBoxPickUp from "./dashboardMaid/dashboardPickUp/DropDownPickUp";
+import DropdownBoxPickUp from "./dashboardMaid/dashboardPickUp/DropdownPickUp";
 
 const LeftSide = () => {
     const [currentComponent, setCurrentComponent] = useState<string>('/maid');
-
+    console.log(currentComponent)
     const handleComponentSwitch = (destination: string) => {
         setCurrentComponent(destination);
     };
@@ -13,7 +13,7 @@ const LeftSide = () => {
     return (
         <>
             {currentComponent === '/maid' && <DropdownBoxMaid onNavigate={handleComponentSwitch} />}
-            {currentComponent === '/maid/pickup' && <DropdownBoxPickUp />}  
+            {currentComponent === '/maid/pickup' && <DropdownBoxPickUp />}    
         </>
     );
 }

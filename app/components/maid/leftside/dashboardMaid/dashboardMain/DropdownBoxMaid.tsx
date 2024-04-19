@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
-import router from 'next/router';
 
 const DropdownBoxMaid = ({ onNavigate }: { onNavigate: any }) => {
   const [autocompleteOptions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
@@ -23,7 +22,7 @@ const DropdownBoxMaid = ({ onNavigate }: { onNavigate: any }) => {
         <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
           {/* First Dropdown */}
           {/* Button styled as a dropdown */}
-          {/* <Link href="/maid/pickup"> */}
+          <Link href="/maid/pickup">
           <Button
             variant="outlined"
             fullWidth
@@ -32,7 +31,7 @@ const DropdownBoxMaid = ({ onNavigate }: { onNavigate: any }) => {
           >
             Go to Dashboard
           </Button>
-          {/* </Link> */}
+          </Link>
 
           {/* Second Dropdown with Autocomplete */}
           <Autocomplete
