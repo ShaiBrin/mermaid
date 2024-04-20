@@ -1,9 +1,8 @@
 "use client";
 import React from 'react';
-import RightSide from "../rightside/map"
-import LeftSide from "../Maid/leftside";
-import Navigation from "../Maid/navigation"
-import DropdownBoxMaid from './leftside/dashboardMaid/dashboardMain/DropdownBoxMaid';
+import RightSide from "../Rightside/Map"
+import DashboardClient from "../Client/DashboardClient/index"
+import Navigation from "../../Page/navigation"
 
 const Client = () => {
     return (
@@ -13,7 +12,7 @@ const Client = () => {
             </div>
             <div className="flex flex-grow">
                 <div className="w-1/4 pt-10 pl-20 pr-5"> 
-                    <LeftSide />
+                    <DashboardClient />
                 </div>
                 <div className="w-3/4 pt-10 pr-20 pl-5">
                     <RightSide />

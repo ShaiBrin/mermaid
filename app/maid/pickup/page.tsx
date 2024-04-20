@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import DropdownPickUp from "../../components/Actors/Maid/leftside/dashboardMaid/dashboardPickUp/DropdownPickUp"; // Adjust the path as necessary
+import DropdownPickUp from "../../components/Actors/leftside/dashboardMaid/dashboardPickUp/DropdownPickUp"; // Adjust the path as necessary
 
 const Page = () => {
     return (

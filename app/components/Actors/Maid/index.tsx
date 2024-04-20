@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
-import RightSide from "../rightside/map";
-import LeftSide from "./leftside";
-import Navigation from "./navigation";
-import DropdownBoxMaid from './leftside/dashboardMaid/dashboardMain/DropdownBoxMaid';
+import RightSide from "../Rightside/Map";
+import LeftSide from "../leftside";
+import Navigation from "../../Page/navigation";
+import DropdownBoxMaid from '../leftside/dashboardMaid/dashboardMain/DropdownBoxMaid';
 
-const Maid = () => {
+const Maid = () => {  
     return (
         <div className="flex flex-col h-screen">
             <div className="w-full">
