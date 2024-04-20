@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import DropdownBoxMaid from "./dashboardMaid/dashboardMain/DropdownBoxMaid";
-import DropdownBoxPickUp from "./dashboardMaid/dashboardPickUp/DropdownPickUp";
+import DropdownBoxMaid from "./DashboardMaid/DropdownBoxMaid";
+import DropdownBoxPickUp from "./dashboardPickUp/DropdownPickUp";
 
 const LeftSide = () => {
     const [currentComponent, setCurrentComponent] = useState<string>('/maid');

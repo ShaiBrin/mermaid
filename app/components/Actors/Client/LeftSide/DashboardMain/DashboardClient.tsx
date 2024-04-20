@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
-const Main = ({ onNavigate }: { onNavigate: any }) => {
+const DashBoardClient = ({ onNavigate }: { onNavigate: any }) => {
   const [autocompleteOptions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -22,11 +22,11 @@ const Main = ({ onNavigate }: { onNavigate: any }) => {
         <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
           {/* First Dropdown */}
           {/* Button styled as a dropdown */}
-          <Link href="/client">
+          <Link href="/client/book">
           <Button
             variant="outlined"
             fullWidth
-            onClick={() => onNavigate('/client')}
+            onClick={() => onNavigate('/client/book')}
             sx={{ marginBottom: 2 }} // Additional styling
           >
             Go to Dashboard
@@ -70,4 +70,4 @@ const Main = ({ onNavigate }: { onNavigate: any }) => {
   );
 };
 
-export default Main;
+export default DashBoardClient;
