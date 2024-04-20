@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
 import RightSide from "../rightside/map"
-import LeftSide from "./Maid/leftside";
-import Navigation from "./Maid/navigation"
+import LeftSide from "../Maid/leftside";
+import Navigation from "../Maid/navigation"
 import DropdownBoxMaid from './leftside/dashboardMaid/dashboardMain/DropdownBoxMaid';
 
 const Client = () => {
