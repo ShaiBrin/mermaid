@@ -15,9 +15,11 @@ export default function HomePageButtons
         <CleaningServices/>
       </Button>
       </Link>
+      <Link href="/auth/login" passHref>
       <Button variant="contained" color="secondary"  style={{ borderRadius: '50%', minWidth: '64px', height: '64px', margin: '0 8px', }}>
         <PersonIcon/>
       </Button>
+      </Link>
     </Box>
   );
 }

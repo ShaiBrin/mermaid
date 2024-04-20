@@ -29,7 +29,7 @@ const DropdownPickUp = () => {
             getOptionLabel={(option) => option}
             filterSelectedOptions
             onChange={handleAutocompleteChange}
-            value={selectedOptions}
+            value={selectedOpA1tions}
             renderInput={(params) => (
               <TextField
                 {...params}
