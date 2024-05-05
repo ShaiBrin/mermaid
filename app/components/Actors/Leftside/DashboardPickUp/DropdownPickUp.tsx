@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
-import router from 'next/router';
 
 const DropdownPickUp = () => {
   const [autocompleteOptions] = useState(['Suggestion 11', 'Suggestion 21', 'Suggestion 31']);

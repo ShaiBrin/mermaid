@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
-const DropdownBoxMaid = ({ onNavigate }: { onNavigate: any }) => {
+const DropdownBoxMaid = () => {
   const [autocompleteOptions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -26,7 +26,7 @@ const DropdownBoxMaid = ({ onNavigate }: { onNavigate: any }) => {
           <Button
             variant="outlined"
             fullWidth
-            onClick={() => onNavigate('/maid/pickup')}
+            // onClick={() => onNavigate('/maid/pickup')}
             sx={{ marginBottom: 2 }} // Additional styling
           >
             Go to Dashboard
