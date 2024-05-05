@@ -1,16 +1,23 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import DropdownBoxMaid from "./DashboardMaid/DropdownBoxMaid";
 import DropdownPickUp from "../Leftside/DashboardPickUp/DropdownPickUp"
+import { usePathname } from 'next/navigation';
 
 
 const LeftSide = () => {
-    const [currentComponent, setCurrentComponent] = useState<string>('/maid');
-    
+    const pathname = usePathname();
+    const changeDropDown = () => {
+        if (pathname.includes('/maid/pickup')){
+            return <DropdownPickUp/>
+        }
+        else {
+            return <DropdownBoxMaid/>
+        }
+    }
     return (
         <>
-            {currentComponent === '/maid' && <DropdownBoxMaid/>}
-            {currentComponent === '/maid/pickup' && <DropdownPickUp />}    
+            {changeDropDown()}
         </>
     );
 }

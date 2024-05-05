@@ -3,7 +3,7 @@ import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, 
 import Autocomplete from '@mui/lab/Autocomplete';
 
 const DropdownBoxMaid = () => {
-  const [autocompleteOptions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
+  const [autocompleteOptions] = useState(['Broom', 'Window', 'Kitchen']);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const theme = useTheme();
@@ -29,7 +29,7 @@ const DropdownBoxMaid = () => {
             // onClick={() => onNavigate('/maid/pickup')}
             sx={{ marginBottom: 2 }} // Additional styling
           >
-            Go to Dashboard
+            Get Maid Now
           </Button>
           </Link>
 
