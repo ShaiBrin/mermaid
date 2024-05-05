@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Maid from "../components/Actors/Maid";
+import LeftSide from "../components/Actors/leftside";
+import RightSide from "../components/Actors/Rightside/Map";
+import Navigation from "../components/Page/navigation";
  const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,9 +19,19 @@ export default function Layout({
   return (
     <html lang="en">
     <body className={inter.className}>
-      <>
-      <Maid/>
-      </>
+      <div className="flex flex-col h-screen">
+        <div className="w-full">
+            <Navigation />
+        </div>
+        <div className="flex flex-grow">
+            <div className="w-1/4 pt-10 pl-20 pr-5"> 
+                <LeftSide />
+            </div>
+            <div className="w-3/4 pt-10 pr-20 pl-5">
+                <RightSide />
+            </div>
+        </div>
+      </div>
       {children}
     </body>
   </html>
