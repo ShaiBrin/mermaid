@@ -2,23 +2,26 @@
 import React from 'react';
 import DropdownBoxMaid from "./DashboardMaid/DropdownBoxMaid";
 import DropdownPickUp from "../Leftside/DashboardPickUp/DropdownPickUp"
+import DashBoardBook from '../Client/LeftSide/DashboardBook/dashboardBook';
 import { usePathname } from 'next/navigation';
 
 
 const LeftSide = () => {
     const pathname = usePathname();
-    const changeDropDown = () => {
-        if (pathname.includes('/maid/pickup')){
-            return <DropdownPickUp/>
-        }
-        else {
-            return <DropdownBoxMaid/>
-        }
-    }
+    const isPickup = pathname.includes('/maid/book');
+  
     return (
-        <>
-            {changeDropDown()}
-        </>
+    
+        <div className="flex flex-grow">
+            <div className="w-full">
+                <DropdownBoxMaid/>
+            </div>
+            {isPickup && (
+            <div className="w-3/5 h-full pl-5">
+                <DropdownPickUp/>
+            </div>
+             )}
+        </div>
     );
 }
 export default LeftSide;
