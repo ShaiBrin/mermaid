@@ -1,13 +1,17 @@
 'use client';
-import LeftSide from "../components/Actors/leftside/index";
+import { usePathname } from "next/navigation";
+import DropdownBoxMaid from "../components/Actors/Leftside/DashboardMaid/DropdownBoxMaid";
 import RightSide from "../components/Actors/Rightside/Map";
 import Navigation from "../components/Page/navigation";
-import { usePathname } from 'next/navigation';
 
 export default function MaidLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const isPickup = pathname.includes('/maid/pickup');
+    // Adjust this line if the actual path segment to check is different
+    const isPickup = pathname.includes('/maid/contacts');
 
+    // Conditionally adjust width classes based on isPickup
+    const leftWidthClass = isPickup ? "w-3/5" : "w-2/5";
+    const rightWidthClass = isPickup ? "w-2/5" : "w-3/5";
 
     return (
         <div className="flex flex-col h-screen">
@@ -15,15 +19,17 @@ export default function MaidLayout({ children }: { children: React.ReactNode }) 
                 <Navigation />
             </div>
             <div className="flex flex-grow">
-                <div className={`flex-initial ${isPickup ? 'w-2/5' : 'w-1/4'} pt-10 pl-10 pr-5`}>
-                    <LeftSide />
+                <div className={`flex-initial ${leftWidthClass} pt-10 pl-10 pr-5`}>
+                    <div className="w-full">
+                        <DropdownBoxMaid/>
+                    </div>
                     {children}
                 </div>
-                <div className={`flex-initial ${isPickup ? 'w-3/5' : 'w-3/4'} pt-10 pr-10 pl-5`}>
+
+                <div className={`flex-initial ${rightWidthClass} pt-10 pr-10 pl-5`}>
                     <RightSide />
                 </div>
             </div>
         </div>
-
     );
 }

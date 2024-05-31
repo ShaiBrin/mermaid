@@ -43,7 +43,7 @@ const Sidebar = ({
             </Link>
           </li>
           <li>
-            <Link href="/contacts" onClick={toggle}>
+            <Link href="/maid/contacts" onClick={toggle}>
               <p>Contacts</p>
             </Link>
           </li>
@@ -54,3 +54,7 @@ const Sidebar = ({
 };
 
 export default Sidebar;
+
+
+
+
