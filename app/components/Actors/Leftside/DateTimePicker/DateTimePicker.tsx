@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Box, FormControl, InputLabel, MenuItem, Select, Grid, TextField } from '@mui/material';
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 
 const generateTimeOptions = () => {
   const times = [];
@@ -18,6 +18,7 @@ const DateTimePicker = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const timeOptions = generateTimeOptions();
+  const tomorrow = addDays(new Date(), 1); // Set minDate to tomorrow
 
   return (
     <Grid container spacing={2}>
@@ -27,6 +28,7 @@ const DateTimePicker = () => {
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
+              minDate={tomorrow}
               customInput={
                 <TextField 
                   label={selectedDate ? format(selectedDate, 'yyyy/MM/dd') : "Today"} 
