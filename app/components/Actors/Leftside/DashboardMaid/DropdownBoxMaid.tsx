@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
+import { MaidContext } from '../../../../context/index';
 
 const DropdownBoxMaid = () => {
-  const [services] = useState(['Broom', 'Window', 'Kitchen']);
-  const [locations] = useState(['Montreal', 'Laval']);
-
-  const [selectedServices, setSelectedServicess] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState('');  
-
+  const { services, locations, selectedServices, selectedLocation, setSelectedServices, setSelectedLocation } = useContext(MaidContext);
   const theme = useTheme();
 
   const handleAutocompleteChange = (event, newValue) => {
-    setSelectedServicess(newValue);
+    setSelectedServices(newValue);
   };
 
   const handleDeleteOption = (optionToDelete) => () => {
-    setSelectedServicess((options) => options.filter((option) => option !== optionToDelete));
+    setSelectedServices((options) => options.filter((option) => option !== optionToDelete));
   };
 
   const handleLocationChange = (event) => {
@@ -62,6 +58,7 @@ const DropdownBoxMaid = () => {
                 margin="normal" // Add margin to match the first dropdown
               />
             )}
+          
 
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
@@ -83,7 +80,6 @@ const DropdownBoxMaid = () => {
           <Button
             variant="outlined"
             fullWidth
-            // onClick={() => onNavigate('/maid/pickup')}
             sx={{ marginBottom: 2 }} // Additional styling
           >
             Get Maid Now
@@ -92,7 +88,9 @@ const DropdownBoxMaid = () => {
         </Box>
       </Grid>
     </Grid>
+    
   );
+
 };
 
 export default DropdownBoxMaid;

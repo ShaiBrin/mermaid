@@ -34,7 +34,7 @@ const Navbar = ({ toggle }: { toggle: () => void }) => {
                 </Link>
               </li>
               <li>
-                <Link href="/maid/services">
+                <Link href="/maid/pickup">
                   <p>Services</p>
                 </Link>
               </li>
