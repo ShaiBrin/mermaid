@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Box, FormControl, InputLabel, MenuItem, Select, Grid, TextField, Button } from '@mui/material';
 import { format, addDays } from 'date-fns';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedDate, setSelectedTime } from '@/app/store/maidSlice';
 
 const generateTimeOptions = () => {
   const times = [];
@@ -16,10 +18,18 @@ const generateTimeOptions = () => {
 };
 
 const DateTimePicker = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState('');
+  const dispatch = useDispatch();
+  const { selectedDate, selectedTime } = useSelector((state) => state.maid);
   const timeOptions = generateTimeOptions();
   const tomorrow = addDays(new Date(), 1); // Set minDate to tomorrow
+
+  const handleDateChange = (date) => {
+    dispatch(setSelectedDate(date));
+  };
+
+  const handleTimeChange = (event) => {
+    dispatch(setSelectedTime(event.target.value));
+  };
 
   return (
     <Grid container spacing={2}>
@@ -28,7 +38,7 @@ const DateTimePicker = () => {
           <FormControl fullWidth>
             <DatePicker
               selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
+              onChange={handleDateChange}
               minDate={tomorrow}
               customInput={
                 <TextField 
@@ -44,7 +54,7 @@ const DateTimePicker = () => {
               labelId="time-picker-label"
               id="time-picker"
               value={selectedTime}
-              onChange={(event) => setSelectedTime(event.target.value)}
+              onChange={handleTimeChange}
               variant="outlined"
             >
               {timeOptions.map((time, index) => (
