@@ -6,7 +6,7 @@ import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation,setSelectedServices } from '@/app/store/maidSlice';
 import Link from 'next/link';
 
-const DropdownBoxMaid = () => {
+const DashboardChoose = () => {
   const { services, locations, selectedServices, selectedLocation } = useSelector((state) => state.maid);
   const dispatch = useDispatch();
 
@@ -67,7 +67,7 @@ const DropdownBoxMaid = () => {
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
-                  color="primary"
+                  color="primary"xs
                   sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
                 />
               ))
@@ -87,4 +87,4 @@ const DropdownBoxMaid = () => {
   );
 };
 
-export default DropdownBoxMaid;
+export default DashboardChoose;

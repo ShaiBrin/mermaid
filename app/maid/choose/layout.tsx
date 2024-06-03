@@ -1,10 +1,9 @@
 'use client';
-import DateTimePicker from "@/app/components/Actors/Leftside/DateTimePicker/DateTimePicker";
-
+import DashboardChoose from "@/app/components/Actors/Leftside/DashboardChoose/DashboardChoose";
 export default function MaidLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex flex-grow">
-            <DateTimePicker/>
+            <DashboardChoose/>
         </div>
     );
 }

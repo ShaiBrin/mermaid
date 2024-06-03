@@ -4,20 +4,20 @@ import DropdownBoxMaid from "@/app/components/Actors/Leftside/DashboardMaid/Drop
 import { usePathname } from 'next/navigation';
 
 const LeftSide = React.memo(() => {
-    const pathname = usePathname();
-    const isPickup = pathname.includes('/maid/pickup');
+  const pathname = usePathname();
+  const isPickupOrChoose = pathname.includes('/maid/pickup') || pathname.includes('/maid/choose');
 
-    return (
-        <div className="flex flex-grow">
-            {!isPickup && (
-                <div className="w-full">
-                    <DropdownBoxMaid/>
-                </div>
-            )}
+  return (
+    <div className="flex flex-grow">
+      {!isPickupOrChoose && (
+        <div className="w-full">
+          <DropdownBoxMaid />
         </div>
-    );
+      )}
+    </div>
+  );
 });
 
-LeftSide.displayName = 'LeftSide'; 
+LeftSide.displayName = 'LeftSide';
 
 export default LeftSide;
