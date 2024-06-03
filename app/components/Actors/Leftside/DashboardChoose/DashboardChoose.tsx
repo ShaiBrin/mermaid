@@ -3,11 +3,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
-import { setSelectedLocation,setSelectedServices } from '@/app/store/maidSlice';
+import { setSelectedLocation, setSelectedServices } from '@/app/store/maidSlice';
 import Link from 'next/link';
+import { format } from 'date-fns';
 
 const DashboardChoose = () => {
-  const { services, locations, selectedServices, selectedLocation } = useSelector((state) => state.maid);
+  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state) => state.maid);
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -67,20 +68,25 @@ const DashboardChoose = () => {
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
-                  color="primary"xs
+                  color="primary"
                   sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
                 />
               ))
             }
           />
-          <Link href="/maid/pickup" passHref>
-            <Button
-              variant="outlined"
-              fullWidth sx={{ marginBottom: 2, marginTop: 2}}
-            >
-              Get Maid Now
-            </Button>
-          </Link>
+          <FormControl fullWidth margin="normal">
+            <InputLabel shrink>Date and Time</InputLabel>
+            <Box display="flex" flexDirection="column" border="1px solid rgba(0, 0, 0, 0.23)" borderRadius="4px" padding="8px">
+              <Box display="flex" justifyContent="space-between" paddingBottom="4px">
+                <span>Date:</span>
+                <span>{selectedDate ? format(selectedDate, 'yyyy/MM/dd') : 'N/A'}</span>
+              </Box>
+              <Box display="flex" justifyContent="space-between">
+                <span>Time:</span>
+                <span>{selectedTime || 'N/A'}</span>
+              </Box>
+            </Box>
+          </FormControl>
         </Box>
       </Grid>
     </Grid>

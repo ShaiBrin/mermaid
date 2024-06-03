@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box, FormControl, InputLabel, MenuItem, Select, Grid, TextField } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, Grid, TextField, Button } from '@mui/material';
 import { format, addDays } from 'date-fns';
+import Link from 'next/link';
 
 const generateTimeOptions = () => {
   const times = [];
@@ -53,6 +54,14 @@ const DateTimePicker = () => {
               ))}
             </Select>
           </FormControl>
+          <Link href="/maid/choose" passHref>
+            <Button
+              variant="outlined"
+              fullWidth sx={{ marginBottom: 2, marginTop: 2}}
+            >
+              Get Maid Now
+            </Button>
+          </Link>
         </Box>
       </Grid>
     </Grid>

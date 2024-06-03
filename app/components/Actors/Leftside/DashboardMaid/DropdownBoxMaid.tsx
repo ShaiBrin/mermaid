@@ -78,7 +78,7 @@ const DropdownBoxMaid = () => {
               variant="outlined"
               fullWidth sx={{ marginBottom: 2, marginTop: 2}}
             >
-              Get Maid Now
+              Choose Date and Time
             </Button>
           </Link>
         </Box>
