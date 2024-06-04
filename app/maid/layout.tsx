@@ -7,10 +7,10 @@ import LeftSide from "../components/Actors/leftside";
 
 export default function MaidLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const isContacts = pathname.includes('/maid/contacts');
+    const isChoose = pathname.includes('/maid/choose');
 
-    const leftWidthClass = isContacts ? "w-3/5" : "w-1/3";
-    const rightWidthClass = isContacts ? "w-2/5" : "w-2/3";
+    const leftWidthClass = isChoose ? "w-3/5" : "w-1/3";
+    const rightWidthClass = isChoose ? "w-2/5" : "w-2/3";
 
     return (
         <div className="flex flex-col h-screen">
@@ -25,7 +25,7 @@ export default function MaidLayout({ children }: { children: React.ReactNode }) 
                     {children}
                 </div>
                 <div className={`flex-initial ${rightWidthClass} pt-10 pr-10 pl-5`}>
-                    <RightSide />
+                    <RightSide/>
                 </div>
             </div>
         </div>
