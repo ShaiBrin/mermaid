@@ -7,6 +7,7 @@ import { setSelectedLocation, setSelectedServices } from '@/app/store/maidSlice'
 import { format } from 'date-fns';
 
 const DashboardChoose = () => {
+
   const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state) => state.maid);
   const dispatch = useDispatch();
 
