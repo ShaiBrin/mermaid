@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
+import { Box, Grid, TextField, Chip, useTheme } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
-import router from 'next/router';
 
 const DashBoardBook = () => {
   const [autocompleteOptions] = useState(['Suggestion 11', 'Suggestion 21', 'Suggestion 31']);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event, newValue) => {
+  const handleAutocompleteChange = (newValue: string[]) => {
     setSelectedOptions(newValue);
   };
 
-  const handleDeleteOption = (optionToDelete) => () => {
+  const handleDeleteOption = (optionToDelete: string) => () => {
     setSelectedOptions((options) => options.filter((option) => option !== optionToDelete));
   };
 
@@ -21,8 +20,6 @@ const DashBoardBook = () => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
-
-          {/* Second Dropdown with Autocomplete */}
           <Autocomplete
             multiple
             options={autocompleteOptions}
@@ -36,19 +33,18 @@ const DashBoardBook = () => {
                 variant="outlined"
                 label="Suggestions"
                 placeholder="Type..."
-                margin="normal" // Add margin to match the first dropdown
+                margin="normal"
               />
             )}
-
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
                 <Chip
-                  key={index} // Add a unique key prop
+                  key={index} // Add key prop with a unique value
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
                   color="primary"
-                  sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }} // Ensure tags are wrapped correctly
+                  sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
                 />
               ))
             }

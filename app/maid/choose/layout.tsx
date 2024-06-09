@@ -1,6 +1,6 @@
 'use client';
-import DashboardChoose from "@/app/components/actors/leftside/DashboardChoose/DashboardChoose";
-import DropdownPickUp from "@/app/components/actors/leftside/DashboardPickUp/DropdownPickUp";
+import DropdownPickUp from "../../components/actors/leftside/DashboardPickUp/DropdownPickUp";
+import DashboardChoose from "../../components/actors/leftside/DashboardChoose/DashboardChoose";
 export default function MaidLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex flex-grow">
