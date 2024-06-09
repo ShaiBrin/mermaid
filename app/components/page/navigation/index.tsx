@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Navbar from "./navbar";
-import Sidebar from "./sidebar";
+// import Sidebar from "./sidebar";
 
 const Navigation = () => {
   // toggle sidebar

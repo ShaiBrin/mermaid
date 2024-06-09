@@ -8,11 +8,11 @@ const DropdownPickUp = () => {
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event, newValue) => {
+  const handleAutocompleteChange = (event: React.SyntheticEvent, newValue: string[]) => {
     setSelectedOptions(newValue);
   };
 
-  const handleDeleteOption = (optionToDelete) => () => {
+  const handleDeleteOption = (optionToDelete: string) => () => {
     setSelectedOptions((options) => options.filter((option) => option !== optionToDelete));
   };
 
@@ -41,8 +41,9 @@ const DropdownPickUp = () => {
 
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  key={index} // Add a unique key prop
+                  // key={index} // Add a unique key prop
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}

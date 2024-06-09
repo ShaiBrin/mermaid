@@ -12,15 +12,15 @@ const DropdownBoxMaid = () => {
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event, newValue) => {
+  const handleAutocompleteChange =  (event: React.SyntheticEvent, newValue: string[]) => {
     dispatch(setSelectedServices(newValue));
   };
 
-  const handleDeleteOption = (optionToDelete) => () => {
-    dispatch(setSelectedServices(selectedServices.filter((option) => option !== optionToDelete)));
+  const handleDeleteOption = (optionToDelete: string) => () => {
+    dispatch(setSelectedServices(selectedServices.filter((option: string) => option !== optionToDelete)));
   };
 
-  const handleLocationChange = (event) => {
+  const handleLocationChange = (event: { target: { value: any; }; }) => {
     dispatch(setSelectedLocation(event.target.value));
   };
 
@@ -62,8 +62,9 @@ const DropdownBoxMaid = () => {
             )}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  key={index}
+                  // key={index}
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
