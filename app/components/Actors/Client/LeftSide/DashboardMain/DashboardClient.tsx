@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button, Link } from '@mui/material';
+import { Box, Grid, TextField, Chip, useTheme, Button, Link } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
 const DashBoardClient = ({ onNavigate }: { onNavigate: any }) => {
   const [autocompleteOptions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event, newValue) => {
+  const handleAutocompleteChange = (event: React.SyntheticEvent, newValue: string[]) => {
     setSelectedOptions(newValue);
   };
 
-  const handleDeleteOption = (optionToDelete) => () => {
+  const handleDeleteOption = (optionToDelete: string) => () => {
     setSelectedOptions((options) => options.filter((option) => option !== optionToDelete));
   };
 
@@ -53,8 +53,9 @@ const DashBoardClient = ({ onNavigate }: { onNavigate: any }) => {
 
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  key={index} // Add a unique key prop
+                  // key={index} // Add a unique key prop
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}

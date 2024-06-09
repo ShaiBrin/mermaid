@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Grid, TextField, Chip, useTheme } from '@mui/material';
+import { Box, Grid, TextField, useTheme, Chip } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
 const DashBoardBook = () => {
@@ -8,7 +8,7 @@ const DashBoardBook = () => {
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (newValue: string[]) => {
+  const handleAutocompleteChange = (event: React.SyntheticEvent, newValue: string[]) => {
     setSelectedOptions(newValue);
   };
 
@@ -36,10 +36,11 @@ const DashBoardBook = () => {
                 margin="normal"
               />
             )}
-            renderTags={(value, getTagProps) =>
-              value.map((option, index) => (
+            renderTags={(tagValue, getTagProps) =>
+              tagValue.map((option, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  key={index} // Add key prop with a unique value
+                  // key={option} // Add key prop with a unique value
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}

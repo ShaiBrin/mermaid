@@ -1,10 +1,9 @@
 'use client';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button } from '@mui/material';
+import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation, setSelectedServices } from '@/app/store/maidSlice';
-import Link from 'next/link';
 import { format } from 'date-fns';
 
 const DashboardChoose = () => {
@@ -13,15 +12,15 @@ const DashboardChoose = () => {
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event, newValue) => {
+  const handleAutocompleteChange = (event: React.SyntheticEvent, newValue: string[]) => {
     dispatch(setSelectedServices(newValue));
   };
 
-  const handleDeleteOption = (optionToDelete) => () => {
-    dispatch(setSelectedServices(selectedServices.filter((option) => option !== optionToDelete)));
+  const handleDeleteOption = (optionToDelete: string) => () => {
+    dispatch(setSelectedServices(selectedServices.filter((option: string) => option !== optionToDelete)));
   };
 
-  const handleLocationChange = (event) => {
+  const handleLocationChange = (event: { target: { value: any; }; }) => {
     dispatch(setSelectedLocation(event.target.value));
   };
 
@@ -38,7 +37,7 @@ const DashboardChoose = () => {
               label="Location"
               onChange={handleLocationChange}
             >
-              {locations.map((location, index) => (
+              {locations.map((location: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
                 <MenuItem key={index} value={location}>
                   {location}
                 </MenuItem>
@@ -63,8 +62,9 @@ const DashboardChoose = () => {
             )}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  key={index}
+                  // key={index}
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
