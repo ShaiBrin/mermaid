@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, SyntheticEvent } from 'react';
 import { Box, Grid, TextField, Chip, useTheme } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
-const DropdownPickUp = () => {
-  const [autocompleteOptions] = useState(['Suggestion 11', 'Suggestion 21', 'Suggestion 31']);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+const DropdownPickUp: React.FC = () => {
+  const [autocompleteOptions] = useState<string[]>(['Suggestion 11', 'Suggestion 21', 'Suggestion 31']);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event: React.SyntheticEvent, newValue: string[]) => {
+  const handleAutocompleteChange = (event: SyntheticEvent, newValue: string[]) => {
     setSelectedOptions(newValue);
   };
 
@@ -20,8 +20,6 @@ const DropdownPickUp = () => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
-
-          {/* Second Dropdown with Autocomplete */}
           <Autocomplete
             multiple
             options={autocompleteOptions}
@@ -35,20 +33,19 @@ const DropdownPickUp = () => {
                 variant="outlined"
                 label="Suggestions"
                 placeholder="Type..."
-                margin="normal" // Add margin to match the first dropdown
+                margin="normal"
               />
             )}
-
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
                 // eslint-disable-next-line react/jsx-key
                 <Chip
-                  // key={index} // Add a unique key prop
+                  // key={option} // Add a unique key prop
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
                   color="primary"
-                  sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }} // Ensure tags are wrapped correctly
+                  sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
                 />
               ))
             }

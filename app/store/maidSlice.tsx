@@ -1,6 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+// store/maidSlice.ts
 
-const initialState = {
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface MaidState {
+  services: string[];
+  locations: string[];
+  selectedServices: string[];
+  selectedLocation: string;
+  selectedDate: string;
+  selectedTime: string;
+}
+
+const initialState: MaidState = {
   services: ['Broom', 'Window', 'Kitchen'],
   locations: ['Montreal', 'Laval'],
   selectedServices: [],
@@ -13,16 +24,16 @@ const maidSlice = createSlice({
   name: 'maid',
   initialState,
   reducers: {
-    setSelectedServices: (state, action) => {
+    setSelectedServices: (state, action: PayloadAction<string[]>) => {
       state.selectedServices = action.payload;
     },
-    setSelectedLocation: (state, action) => {
+    setSelectedLocation: (state, action: PayloadAction<string>) => {
       state.selectedLocation = action.payload;
     },
-    setSelectedDate: (state, action) => { // Add setSelectedDate action
+    setSelectedDate: (state, action: PayloadAction<string>) => { // Add setSelectedDate action
       state.selectedDate = action.payload;
     },
-    setSelectedTime: (state, action) => { // Add setSelectedTime action
+    setSelectedTime: (state, action: PayloadAction<string>) => { // Add setSelectedTime action
       state.selectedTime = action.payload;
     },
   },

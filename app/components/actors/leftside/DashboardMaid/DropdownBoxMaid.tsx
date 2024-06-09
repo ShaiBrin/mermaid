@@ -5,9 +5,11 @@ import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, 
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation,setSelectedServices } from '@/app/store/maidSlice';
 import Link from 'next/link';
+import { RootState } from '@/app/store';
+
 
 const DropdownBoxMaid = () => {
-  const { services, locations, selectedServices, selectedLocation } = useSelector((state) => state.maid);
+  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state: RootState) => state.maid);
   const dispatch = useDispatch();
 
   const theme = useTheme();

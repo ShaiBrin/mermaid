@@ -6,6 +6,7 @@ import { format, addDays } from 'date-fns';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedDate, setSelectedTime } from '@/app/store/maidSlice';
+import { RootState } from '@/app/store';
 
 const generateTimeOptions = () => {
   const times = [];
@@ -19,15 +20,17 @@ const generateTimeOptions = () => {
 
 const DateTimePicker = () => {
   const dispatch = useDispatch();
-  const { selectedDate, selectedTime } = useSelector((state) => state.maid);
+  const { selectedDate, selectedTime } = useSelector((state: RootState) => state.maid);
   const timeOptions = generateTimeOptions();
   const tomorrow = addDays(new Date(), 1); // Set minDate to tomorrow
 
-  const handleDateChange = (date) => {
-    dispatch(setSelectedDate(date));
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      dispatch(setSelectedDate(date.toISOString())); // Store the date as an ISO string in Redux state
+    }
   };
 
-  const handleTimeChange = (event) => {
+  const handleTimeChange = (event: { target: { value: string; }; }) => {
     dispatch(setSelectedTime(event.target.value));
   };
 
@@ -37,12 +40,12 @@ const DateTimePicker = () => {
         <Box p={2} sx={{ border: '2px solid #ccc', borderRadius: '10px' }}>
           <FormControl fullWidth>
             <DatePicker
-              selected={selectedDate}
+              selected={selectedDate ? new Date(selectedDate) : null} // Convert the string back to a Date object
               onChange={handleDateChange}
               minDate={tomorrow}
               customInput={
                 <TextField 
-                  label={selectedDate ? format(selectedDate, 'yyyy/MM/dd') : "Today"} 
+                  label={selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : "Today"} 
                   variant="outlined" 
                 />
               }
@@ -67,7 +70,8 @@ const DateTimePicker = () => {
           <Link href="/maid/choose" passHref>
             <Button
               variant="outlined"
-              fullWidth sx={{ marginBottom: 2, marginTop: 2}}
+              fullWidth
+              sx={{ marginBottom: 2, marginTop: 2 }}
             >
               Get Maid Now
             </Button>

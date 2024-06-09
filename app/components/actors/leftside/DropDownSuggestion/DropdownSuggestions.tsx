@@ -3,16 +3,16 @@ import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, 
 import Autocomplete from '@mui/lab/Autocomplete';
 
 const DropdownPickUp = () => {
-  const [autocompleteOptions] = useState(['Suggestion 11', 'Suggestion 21', 'Suggestion 31']);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [autocompleteOptions] = useState<string[]>(['Suggestion 11', 'Suggestion 21', 'Suggestion 31']);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const theme = useTheme();
 
-  const handleAutocompleteChange = (event, newValue) => {
+  const handleAutocompleteChange =  (event: React.SyntheticEvent, newValue: string[]) => {
     setSelectedOptions(newValue);
   };
 
-  const handleDeleteOption = (optionToDelete) => () => {
+  const handleDeleteOption = (optionToDelete: string) => () => {
     setSelectedOptions((options) => options.filter((option) => option !== optionToDelete));
   };
 
@@ -41,8 +41,9 @@ const DropdownPickUp = () => {
 
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
+                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  key={index} // Add a unique key prop
+                  // key={index} // Add a unique key prop
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}

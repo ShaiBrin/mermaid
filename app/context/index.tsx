@@ -1,6 +1,19 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
 
-export const MaidContext = createContext({
+type MaidContextType = {
+  services: string[];
+  locations: string[];
+  selectedServices: string[];
+  selectedLocation: string;
+  selectedDate: Date | null;
+  selectedTime: string;
+  setSelectedServices: Dispatch<SetStateAction<string[]>>;
+  setSelectedLocation: Dispatch<SetStateAction<string>>;
+  setSelectedDate: Dispatch<SetStateAction<Date | null>>;
+  setSelectedTime: Dispatch<SetStateAction<string>>;
+};
+
+export const MaidContext = createContext<MaidContextType>({
   services: [],
   locations: [],
   selectedServices: [],
@@ -13,13 +26,13 @@ export const MaidContext = createContext({
   setSelectedTime: () => {},
 });
 
-export const MaidProvider = ({ children }) => {
+export const MaidProvider = ({ children }: { children: React.ReactNode }) => {
   const services = ['Broom', 'Window', 'Kitchen'];
   const locations = ['Montreal', 'Laval'];
-  const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string>('');
 
   return (
     <MaidContext.Provider value={{

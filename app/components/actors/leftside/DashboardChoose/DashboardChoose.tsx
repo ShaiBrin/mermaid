@@ -5,10 +5,10 @@ import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, 
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation, setSelectedServices } from '@/app/store/maidSlice';
 import { format } from 'date-fns';
+import { RootState } from '@/app/store';
 
 const DashboardChoose = () => {
-
-  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state) => state.maid);
+  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state: RootState) => state.maid);
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -38,7 +38,7 @@ const DashboardChoose = () => {
               label="Location"
               onChange={handleLocationChange}
             >
-              {locations.map((location: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
+              {locations.map((location, index) => (
                 <MenuItem key={index} value={location}>
                   {location}
                 </MenuItem>
@@ -65,7 +65,7 @@ const DashboardChoose = () => {
               value.map((option, index) => (
                 // eslint-disable-next-line react/jsx-key
                 <Chip
-                  // key={index}
+                  // key={option} // Add key prop with a unique value
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
@@ -80,7 +80,7 @@ const DashboardChoose = () => {
             <Box display="flex" flexDirection="column" border="1px solid rgba(0, 0, 0, 0.23)" borderRadius="4px" padding="8px">
               <Box display="flex" justifyContent="space-between" paddingBottom="4px">
                 <span>Date:</span>
-                <span>{selectedDate ? format(selectedDate, 'yyyy/MM/dd') : 'N/A'}</span>
+                <span>{selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : 'N/A'}</span>
               </Box>
               <Box display="flex" justifyContent="space-between">
                 <span>Time:</span>
