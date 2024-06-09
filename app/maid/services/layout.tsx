@@ -1,5 +1,5 @@
 'use client';
-import DropdownPickUp from "@/app/components/Actors/Leftside/dashboardPickUp/DropdownPickUp";
+import DropdownPickUp from "@/app/components/actors/leftside/DashboardPickUp/DropdownPickUp";
 export default function ServiceLayout({  }: { }) {
 
     return (

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import DropdownBoxMaid from "@/app/components/Actors/Leftside/DashboardMaid/DropdownBoxMaid";
+import DropdownBoxMaid from "@/app/components/actors/leftside/DashboardMaid/DropdownBoxMaid";
 import { usePathname } from 'next/navigation';
 
 const LeftSide = React.memo(() => {

@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
 import { usePathname } from "next/navigation";
-import RightSide from "../components/Actors/Rightside/Map";
-import Navigation from "../components/Page/navigation";
-import LeftSide from "../components/Actors/leftside";
+import RightSide from "../components/actors/rightside/map";
+import Navigation from "../components/page/navigation";
+import LeftSide from "../components/actors/leftside";
 
 export default function MaidLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();

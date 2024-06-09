@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import Button from '@mui/material/Button';
-import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-import HomePageButtons from './components/UI/HomePageButtons';
+// import Button from '@mui/material/Button';
+// import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
+import HomePageButtons from './components/ui/HomePageButtons';
 
 const Home: NextPage = () => {
   return (

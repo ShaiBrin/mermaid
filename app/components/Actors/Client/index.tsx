@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
-import RightSide from "../Rightside/Map"
-import LeftSide from "../Client/LeftSide"
-import Navigation from "../../Page/navigation"
+import RightSide from "../rightside/map"
+import LeftSide from "../client/LeftSide"
+import Navigation from "../../page/navigation"
 
 const Client = () => {
     return (
