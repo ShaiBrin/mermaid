@@ -1,11 +1,14 @@
 "use client";
 import React from 'react';
-import MyGoogleMap from "./googlemap";
+import {MyGoogleMap} from "./googlemap";
+import { MapProvider } from '@/providers/map-providers';
 
 const RightSide = () => {
     return (
       <div className="h-full">
-      < MyGoogleMap/>
+        <MapProvider>
+          < MyGoogleMap/>
+        </MapProvider>
       </div>
     );
   }
