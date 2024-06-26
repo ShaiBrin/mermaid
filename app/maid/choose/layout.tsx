@@ -10,7 +10,7 @@ export default function MaidLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             <div className="w-3/5 pl-10">
-                <DropdownPickUp/>
+                <DropdownPickUp />
             </div>
         </div>
     );
