@@ -2,10 +2,9 @@ import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { Box, Grid, TextField, Chip, useTheme } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
-
 const DropdownPickUp: React.FC = () => {
     const [autocompleteOptions, setAutocompleteOptions] = useState<string[]>([]);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOption, setSelectedOption] = useState<string | null>(null); 
     const theme = useTheme();
 
     useEffect(() => {
@@ -24,19 +23,14 @@ const DropdownPickUp: React.FC = () => {
                 }
             } catch (error) {
                 console.error('Error fetching maids:', error);
-                // Handle error state or alert the user
             }
         };
 
         fetchMaids();
     }, []);
 
-    const handleAutocompleteChange = (event: SyntheticEvent, newValue: string[]) => {
-        setSelectedOptions(newValue);
-    };
-
-    const handleDeleteOption = (optionToDelete: string) => () => {
-        setSelectedOptions(options => options.filter(option => option !== optionToDelete));
+    const handleAutocompleteChange = (event: SyntheticEvent, newValue: string | null) => {
+        setSelectedOption(newValue); 
     };
 
     return (
@@ -44,17 +38,15 @@ const DropdownPickUp: React.FC = () => {
             <Grid item xs={12}>
                 <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
                     <Autocomplete
-                        multiple
                         options={autocompleteOptions}
                         getOptionLabel={option => option}
-                        filterSelectedOptions
                         onChange={handleAutocompleteChange}
-                        value={selectedOptions}
+                        value={selectedOption}
                         renderInput={params => (
                             <TextField
                                 {...params}
                                 variant="outlined"
-                                label="Suggestions"
+                                label="Choose Maid"
                                 placeholder="Type..."
                                 margin="normal"
                             />
@@ -66,7 +58,6 @@ const DropdownPickUp: React.FC = () => {
                                     // key={option} // Add a unique key prop
                                     {...getTagProps({ index })}
                                     label={option}
-                                    onDelete={handleDeleteOption(option)}
                                     color="primary"
                                     sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
                                 />
