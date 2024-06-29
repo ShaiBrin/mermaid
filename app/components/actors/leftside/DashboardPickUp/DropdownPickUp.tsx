@@ -87,7 +87,7 @@ const DropdownPickUp: React.FC = () => {
                             ))
                         }
                     />
-                        <Link href="/maid/pickup" passHref>
+                        <Link href="/maid/book" passHref>
                             <Button
                                 variant="outlined"
                                 fullWidth sx={{ marginBottom: 2, marginTop: 2}}
