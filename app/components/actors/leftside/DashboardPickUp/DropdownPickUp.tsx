@@ -1,10 +1,11 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { Box, Grid, TextField, Chip, useTheme } from '@mui/material';
+import { Box, Grid, TextField, Chip, useTheme, Modal, Typography, Button } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 
 const DropdownPickUp: React.FC = () => {
     const [autocompleteOptions, setAutocompleteOptions] = useState<string[]>([]);
-    const [selectedOption, setSelectedOption] = useState<string | null>(null); 
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const theme = useTheme();
 
     useEffect(() => {
@@ -30,7 +31,14 @@ const DropdownPickUp: React.FC = () => {
     }, []);
 
     const handleAutocompleteChange = (event: SyntheticEvent, newValue: string | null) => {
-        setSelectedOption(newValue); 
+        setSelectedOption(newValue);
+        if (newValue) {
+            setIsModalOpen(true); // Open modal when a maid is selected
+        }
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false); // Close modal
     };
 
     return (
@@ -55,8 +63,8 @@ const DropdownPickUp: React.FC = () => {
                             value.map((option, index) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <Chip
-                                    // key={option} // Add a unique key prop
                                     {...getTagProps({ index })}
+                                    // key={option} // Add a unique key prop
                                     label={option}
                                     color="primary"
                                     sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
@@ -66,6 +74,30 @@ const DropdownPickUp: React.FC = () => {
                     />
                 </Box>
             </Grid>
+            {/* Modal for displaying maid details */}
+            <Modal
+                open={isModalOpen}
+                onClose={handleCloseModal}
+                aria-labelledby="maid-details-modal-title"
+                aria-describedby="maid-details-modal-description"
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Box sx={{ bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: '8px' }}>
+                    <Typography variant="h6" id="maid-details-modal-title" gutterBottom>
+                        Maid Details
+                    </Typography>
+                    <Typography id="maid-details-modal-description" gutterBottom>
+                        Display maid details here based on the selected option: {selectedOption}
+                    </Typography>
+                    <Button onClick={handleCloseModal} variant="contained" color="primary">
+                        Close
+                    </Button>
+                </Box>
+            </Modal>
         </Grid>
     );
 };
