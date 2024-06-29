@@ -11,12 +11,14 @@ export const metadata = {
 
 export default function RootLayout({ children, }:{children: React.ReactNode;}) {
   return (
-      <div className={inter.className}>
+    <html>
+      <body className={inter.className}>
         <ClientProvider>
           <MapProvider>
             {children}
           </MapProvider>
         </ClientProvider>
-      </div>
+      </body>
+    </html>
   );
 }
