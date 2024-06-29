@@ -1,10 +1,20 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { Box, Grid, TextField, Chip, useTheme, Modal, Typography, Button } from '@mui/material';
+import Link from 'next/link';
+
 import Autocomplete from '@mui/lab/Autocomplete';
 
+interface MaidDetails {
+    firstname: string;
+    lastname: string;
+    rating: number;
+    price: number;
+    experience: string;
+}
+
 const DropdownPickUp: React.FC = () => {
-    const [autocompleteOptions, setAutocompleteOptions] = useState<string[]>([]);
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [autocompleteOptions, setAutocompleteOptions] = useState<MaidDetails[]>([]);
+    const [selectedOption, setSelectedOption] = useState<MaidDetails | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const theme = useTheme();
 
@@ -17,8 +27,14 @@ const DropdownPickUp: React.FC = () => {
                 }
                 const data = await res.json();
                 if (data && data.maids && Array.isArray(data.maids.rows)) {
-                    const maidNames = data.maids.rows.map((maid: any) => `${maid.firstname} ${maid.lastname}`);
-                    setAutocompleteOptions(maidNames);
+                    const maidDetails = data.maids.rows.map((maid: any) => ({
+                        firstname: maid.firstname,
+                        lastname: maid.lastname,
+                        rating: maid.rating || 0, // Assuming rating is a number
+                        price: maid.price || 0, // Assuming price is a number
+                        experience: maid.experience || '', // Assuming experience is a string
+                    }));
+                    setAutocompleteOptions(maidDetails);
                 } else {
                     throw new Error('Invalid maids data structure');
                 }
@@ -30,7 +46,7 @@ const DropdownPickUp: React.FC = () => {
         fetchMaids();
     }, []);
 
-    const handleAutocompleteChange = (event: SyntheticEvent, newValue: string | null) => {
+    const handleAutocompleteChange = (event: SyntheticEvent, newValue: MaidDetails | null) => {
         setSelectedOption(newValue);
         if (newValue) {
             setIsModalOpen(true); // Open modal when a maid is selected
@@ -47,10 +63,10 @@ const DropdownPickUp: React.FC = () => {
                 <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
                     <Autocomplete
                         options={autocompleteOptions}
-                        getOptionLabel={option => option}
+                        getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
                         onChange={handleAutocompleteChange}
                         value={selectedOption}
-                        renderInput={params => (
+                        renderInput={(params) => (
                             <TextField
                                 {...params}
                                 variant="outlined"
@@ -63,15 +79,23 @@ const DropdownPickUp: React.FC = () => {
                             value.map((option, index) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <Chip
-                                    {...getTagProps({ index })}
                                     // key={option} // Add a unique key prop
-                                    label={option}
+                                    {...getTagProps({ index })}
+                                    label={`${option.firstname} ${option.lastname}`}
                                     color="primary"
                                     sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
                                 />
                             ))
                         }
                     />
+                    <Link href="/maid/pickup" passHref>
+                        <Button
+                            variant="outlined"
+                            fullWidth sx={{ marginBottom: 2, marginTop: 2}}
+                            >
+                            Reserve Maid
+                        </Button>
+                    </Link>
                 </Box>
             </Grid>
             {/* Modal for displaying maid details */}
@@ -87,15 +111,28 @@ const DropdownPickUp: React.FC = () => {
                 }}
             >
                 <Box sx={{ bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: '8px' }}>
-                    <Typography variant="h6" id="maid-details-modal-title" gutterBottom>
-                        Maid Details
-                    </Typography>
-                    <Typography id="maid-details-modal-description" gutterBottom>
-                        Display maid details here based on the selected option: {selectedOption}
-                    </Typography>
-                    <Button onClick={handleCloseModal} variant="contained" color="primary">
-                        Close
-                    </Button>
+                    {selectedOption && (
+                        <>
+                            <Typography variant="h6" id="maid-details-modal-title" gutterBottom>
+                                Maid Details
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                Name: {selectedOption.firstname} {selectedOption.lastname}
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                Rating: {selectedOption.rating}/5
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                Price: ${selectedOption.price}
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                Experience: {selectedOption.experience}
+                            </Typography>
+                            <Button onClick={handleCloseModal} variant="contained" color="primary">
+                                Close
+                            </Button>
+                        </>
+                    )}
                 </Box>
             </Modal>
         </Grid>
