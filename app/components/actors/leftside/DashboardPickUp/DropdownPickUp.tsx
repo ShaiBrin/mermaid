@@ -1,10 +1,9 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { Box, Grid, TextField, Chip, useTheme, Modal, Typography, Button } from '@mui/material';
-import Link from 'next/link';
-
+import { Box, Grid, TextField, Chip, useTheme, Button } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
-
-interface MaidDetails {
+import MaidModal from '../MaidModal/MaidModal';
+import Link from 'next/link';
+interface MaidModal {
     firstname: string;
     lastname: string;
     rating: number;
@@ -13,8 +12,8 @@ interface MaidDetails {
 }
 
 const DropdownPickUp: React.FC = () => {
-    const [autocompleteOptions, setAutocompleteOptions] = useState<MaidDetails[]>([]);
-    const [selectedOption, setSelectedOption] = useState<MaidDetails | null>(null);
+    const [autocompleteOptions, setAutocompleteOptions] = useState<MaidModal[]>([]);
+    const [selectedOption, setSelectedOption] = useState<MaidModal | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const theme = useTheme();
 
@@ -46,7 +45,7 @@ const DropdownPickUp: React.FC = () => {
         fetchMaids();
     }, []);
 
-    const handleAutocompleteChange = (event: SyntheticEvent, newValue: MaidDetails | null) => {
+    const handleAutocompleteChange = (event: SyntheticEvent, newValue: MaidModal | null) => {
         setSelectedOption(newValue);
         if (newValue) {
             setIsModalOpen(true); // Open modal when a maid is selected
@@ -88,53 +87,26 @@ const DropdownPickUp: React.FC = () => {
                             ))
                         }
                     />
-                    <Link href="/maid/pickup" passHref>
-                        <Button
-                            variant="outlined"
-                            fullWidth sx={{ marginBottom: 2, marginTop: 2}}
-                            >
-                            Reserve Maid
-                        </Button>
-                    </Link>
+                        <Link href="/maid/pickup" passHref>
+                            <Button
+                                variant="outlined"
+                                fullWidth sx={{ marginBottom: 2, marginTop: 2}}
+                                >
+                                    Reserve Maid
+                            </Button>
+                        </Link>
                 </Box>
             </Grid>
-            {/* Modal for displaying maid details */}
-            <Modal
-                open={isModalOpen}
+            {/* MaidDetailsModal component */}
+            <MaidModal
+                firstname={selectedOption?.firstname || ''}
+                lastname={selectedOption?.lastname || ''}
+                rating={selectedOption?.rating || 0}
+                price={selectedOption?.price || 0}
+                experience={selectedOption?.experience || ''}
+                isOpen={isModalOpen}
                 onClose={handleCloseModal}
-                aria-labelledby="maid-details-modal-title"
-                aria-describedby="maid-details-modal-description"
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <Box sx={{ bgcolor: 'background.paper', boxShadow: 24, p: 4, borderRadius: '8px' }}>
-                    {selectedOption && (
-                        <>
-                            <Typography variant="h6" id="maid-details-modal-title" gutterBottom>
-                                Maid Details
-                            </Typography>
-                            <Typography variant="body1" gutterBottom>
-                                Name: {selectedOption.firstname} {selectedOption.lastname}
-                            </Typography>
-                            <Typography variant="body1" gutterBottom>
-                                Rating: {selectedOption.rating}/5
-                            </Typography>
-                            <Typography variant="body1" gutterBottom>
-                                Price: ${selectedOption.price}
-                            </Typography>
-                            <Typography variant="body1" gutterBottom>
-                                Experience: {selectedOption.experience}
-                            </Typography>
-                            <Button onClick={handleCloseModal} variant="contained" color="primary">
-                                Close
-                            </Button>
-                        </>
-                    )}
-                </Box>
-            </Modal>
+            />
         </Grid>
     );
 };
