@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface MaidState {
+interface PrefencesState {
   services: string[];
   locations: string[];
   selectedServices: string[];
@@ -11,17 +11,17 @@ interface MaidState {
   selectedTime: string;
 }
 
-const initialState: MaidState = {
+const initialState: PrefencesState = {
   services: ['Broom', 'Window', 'Kitchen'],
   locations: ['Montreal', 'Laval'],
   selectedServices: [],
   selectedLocation: '',
-  selectedDate: '', // Add selectedDate
-  selectedTime: '', // Add selectedTime
+  selectedDate: '', 
+  selectedTime: '', 
 };
 
-const maidSlice = createSlice({
-  name: 'maid',
+const preferencesSlice = createSlice({
+  name: 'preferences',
   initialState,
   reducers: {
     setSelectedServices: (state, action: PayloadAction<string[]>) => {
@@ -39,5 +39,5 @@ const maidSlice = createSlice({
   },
 });
 
-export const { setSelectedServices, setSelectedLocation, setSelectedDate, setSelectedTime } = maidSlice.actions;
-export default maidSlice.reducer;
+export const { setSelectedServices, setSelectedLocation, setSelectedDate, setSelectedTime } = preferencesSlice.actions;
+export default preferencesSlice.reducer;

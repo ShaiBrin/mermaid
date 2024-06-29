@@ -3,13 +3,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
-import { setSelectedLocation,setSelectedServices } from '@/app/store/maidSlice';
+import { setSelectedLocation,setSelectedServices } from '@/app/store/preferencesSlice';
 import Link from 'next/link';
 import { RootState } from '@/app/store';
 
 
 const DropdownBoxMaid = () => {
-  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state: RootState) => state.maid);
+  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state: RootState) => state.preferences);
   const dispatch = useDispatch();
 
   const theme = useTheme();

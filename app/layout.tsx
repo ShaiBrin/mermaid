@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 import ClientProvider from '@/providers/client-provider';
-
+import { MapProvider } from '@/providers/map-providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -11,12 +11,12 @@ export const metadata = {
 
 export default function RootLayout({ children, }:{children: React.ReactNode;}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+      <div className={inter.className}>
         <ClientProvider>
-          {children}
+          <MapProvider>
+            {children}
+          </MapProvider>
         </ClientProvider>
-      </body>
-    </html>
+      </div>
   );
 }

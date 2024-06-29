@@ -5,7 +5,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select, Grid, TextField, Button
 import { format, addDays } from 'date-fns';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedDate, setSelectedTime } from '@/app/store/maidSlice';
+import { setSelectedDate, setSelectedTime } from '@/app/store/preferencesSlice';
 import { RootState } from '@/app/store';
 
 const generateTimeOptions = () => {
@@ -20,7 +20,7 @@ const generateTimeOptions = () => {
 
 const DateTimePicker = () => {
   const dispatch = useDispatch();
-  const { selectedDate, selectedTime } = useSelector((state: RootState) => state.maid);
+  const { selectedDate, selectedTime } = useSelector((state: RootState) => state.preferences);
   const timeOptions = generateTimeOptions();
   const tomorrow = addDays(new Date(), 1); // Set minDate to tomorrow
 

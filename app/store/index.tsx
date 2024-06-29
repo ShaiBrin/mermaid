@@ -1,11 +1,13 @@
 // store/index.ts
 
 import { configureStore } from '@reduxjs/toolkit';
-import maidReducer from './maidSlice';
+import preferencesSlice from './preferencesSlice';
+import geoLocationsSlice from './geoLocationsSlice';
 
 export const store = configureStore({
   reducer: {
-    maid: maidReducer,
+    preferences: preferencesSlice,
+    geoLocations: geoLocationsSlice, 
   },
 });
 

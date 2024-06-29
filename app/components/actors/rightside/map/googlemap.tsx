@@ -1,46 +1,70 @@
-/*Since the map was loaded on client side, 
-we need to make this component client rendered as well*/
-'use client'
+// MyGoogleMap.tsx
 
-//Map component Component from library
-import { GoogleMap } from "@react-google-maps/api";
+import React from 'react';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectClientGeolocation } from '@/app/store/geoLocationsSlice';
+import { RootState } from '@/app/store';
 
-//Map's styling
 const defaultMapContainerStyle = {
-    width: '100%',
-    height: '100vh',
-    borderRadius: '15px 0px 0px 15px',
+  width: '100%',
+  height: '100vh',
+  borderRadius: '15px 0px 0px 15px',
 };
 
-//K2's coordinates
 const defaultMapCenter = {
-    lat: 35.8799866,
-    lng: 76.5048004
-}
+  lat: 35.8799866,
+  lng: 76.5048004,
+};
 
-//Default zoom level, can be adjusted
-const defaultMapZoom = 18
+const defaultMapZoom = 18;
 
-//Map options
 const defaultMapOptions = {
-    zoomControl: true,
-    tilt: 0,
-    gestureHandling: 'auto',
-    mapTypeId: 'satellite',
+  zoomControl: true,
+  tilt: 0,
+  gestureHandling: 'auto',
+  mapTypeId: 'satellite',
 };
 
 const MyGoogleMap = () => {
-    return (
-        <div className="w-full">
-            <GoogleMap
-                mapContainerStyle={defaultMapContainerStyle}
-                center={defaultMapCenter}
-                zoom={defaultMapZoom}
-                options={defaultMapOptions}
-            >
-            </GoogleMap>
-        </div>
-    )
+  const clientGeoLocations = useSelector((state: RootState) => state.geoLocations.clientGeoLocations);
+  const dispatch = useDispatch();
+
+  const handleMapClick = (event: google.maps.MapMouseEvent) => {
+    if (event.latLng) {
+      const clickedLat = event.latLng.lat();
+      const clickedLng = event.latLng.lng();
+      dispatch(setSelectClientGeolocation({ lat: clickedLat, lng: clickedLng }));
+    }
+  };
+
+  return (
+    <div className="w-full">
+      <GoogleMap
+        mapContainerStyle={defaultMapContainerStyle}
+        center={{ lat: clientGeoLocations.lat || defaultMapCenter.lat, lng: clientGeoLocations.lng || defaultMapCenter.lng }}
+        zoom={defaultMapZoom}
+        options={defaultMapOptions}
+        onClick={handleMapClick}
+      >
+        {/* Render marker for selected location */}
+        <Marker
+          position={{ lat: clientGeoLocations.lat || defaultMapCenter.lat, lng: clientGeoLocations.lng || defaultMapCenter.lng }}
+          draggable={true} // Optional: Allow marker to be dragged
+          onDragEnd={(e) => {
+            if (e.latLng) {
+              dispatch(
+                setSelectClientGeolocation({
+                  lat: e.latLng.lat(),
+                  lng: e.latLng.lng(),
+                })
+              );
+            }
+          }}
+        />
+      </GoogleMap>
+    </div>
+  );
 };
 
 export { MyGoogleMap };
