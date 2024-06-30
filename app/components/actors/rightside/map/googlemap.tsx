@@ -1,7 +1,7 @@
 // MyGoogleMap.tsx
 
 import React from 'react';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectClientGeolocation } from '@/app/store/geoLocationsSlice';
 import { RootState } from '@/app/store';
@@ -23,7 +23,6 @@ const defaultMapOptions = {
   zoomControl: true,
   tilt: 0,
   gestureHandling: 'auto',
-  mapTypeId: 'satellite',
 };
 
 const MyGoogleMap = () => {
