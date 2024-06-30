@@ -7,7 +7,7 @@ import { setSelectedLocation, setSelectedServices } from '@/app/store/preference
 import { format } from 'date-fns';
 import { RootState } from '@/app/store';
 
-const DashboardChoose = () => {
+const DashboardPreferences = () => {
   const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state: RootState) => state.preferences);
   const dispatch = useDispatch();
 
@@ -94,4 +94,4 @@ const DashboardChoose = () => {
   );
 };
 
-export default DashboardChoose;
+export default DashboardPreferences;

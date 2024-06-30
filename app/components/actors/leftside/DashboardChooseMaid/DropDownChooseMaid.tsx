@@ -3,7 +3,8 @@ import { Box, Grid, TextField, Chip, useTheme, Button } from '@mui/material';
 import Autocomplete from '@mui/lab/Autocomplete';
 import MaidModal from '../MaidModal/MaidModal';
 import Link from 'next/link';
-interface MaidModal {
+
+interface MaidDetails {
     firstname: string;
     lastname: string;
     rating: number;
@@ -11,9 +12,9 @@ interface MaidModal {
     experience: string;
 }
 
-const DropdownPickUp: React.FC = () => {
-    const [autocompleteOptions, setAutocompleteOptions] = useState<MaidModal[]>([]);
-    const [selectedOption, setSelectedOption] = useState<MaidModal | null>(null);
+const DropDownChooseMaid: React.FC = () => {
+    const [autocompleteOptions, setAutocompleteOptions] = useState<MaidDetails[]>([]);
+    const [selectedOption, setSelectedOption] = useState<MaidDetails | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const theme = useTheme();
 
@@ -29,9 +30,9 @@ const DropdownPickUp: React.FC = () => {
                     const maidDetails = data.maids.rows.map((maid: any) => ({
                         firstname: maid.firstname,
                         lastname: maid.lastname,
-                        rating: maid.rating || 0, // Assuming rating is a number
-                        price: maid.price || 0, // Assuming price is a number
-                        experience: maid.experience || '', // Assuming experience is a string
+                        rating: maid.rating || 0,
+                        price: maid.price || 0,
+                        experience: maid.experience || '',
                     }));
                     setAutocompleteOptions(maidDetails);
                 } else {
@@ -45,7 +46,7 @@ const DropdownPickUp: React.FC = () => {
         fetchMaids();
     }, []);
 
-    const handleAutocompleteChange = (event: SyntheticEvent, newValue: MaidModal | null) => {
+    const handleAutocompleteChange = (event: SyntheticEvent, newValue: MaidDetails | null) => {
         setSelectedOption(newValue);
         if (newValue) {
             setIsModalOpen(true); // Open modal when a maid is selected
@@ -78,7 +79,6 @@ const DropdownPickUp: React.FC = () => {
                             value.map((option, index) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <Chip
-                                    // key={option} // Add a unique key prop
                                     {...getTagProps({ index })}
                                     label={`${option.firstname} ${option.lastname}`}
                                     color="primary"
@@ -87,14 +87,15 @@ const DropdownPickUp: React.FC = () => {
                             ))
                         }
                     />
-                        <Link href="/maid/book" passHref>
-                            <Button
-                                variant="outlined"
-                                fullWidth sx={{ marginBottom: 2, marginTop: 2}}
-                                >
-                                    Reserve Maid
-                            </Button>
-                        </Link>
+                    <Link href="/maid/book" passHref>
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            sx={{ marginBottom: 2, marginTop: 2 }}
+                        >
+                            Reserve Maid
+                        </Button>
+                    </Link>
                 </Box>
             </Grid>
             {/* MaidDetailsModal component */}
@@ -111,4 +112,4 @@ const DropdownPickUp: React.FC = () => {
     );
 };
 
-export default DropdownPickUp;
+export default DropDownChooseMaid;

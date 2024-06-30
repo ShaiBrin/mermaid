@@ -6,6 +6,7 @@ interface PrefencesState {
   services: string[];
   locations: string[];
   selectedServices: string[];
+  address: string;
   selectedLocation: string;
   selectedDate: string;
   selectedTime: string;
@@ -15,6 +16,7 @@ const initialState: PrefencesState = {
   services: ['Broom', 'Window', 'Kitchen'],
   locations: ['Montreal', 'Laval'],
   selectedServices: [],
+  address: '',
   selectedLocation: '',
   selectedDate: '', 
   selectedTime: '', 
@@ -30,6 +32,9 @@ const preferencesSlice = createSlice({
     setSelectedLocation: (state, action: PayloadAction<string>) => {
       state.selectedLocation = action.payload;
     },
+    setAddressd: (state, action: PayloadAction<string>) => { // Add setSelectAddress action
+      state.selectedDate = action.payload;
+    },
     setSelectedDate: (state, action: PayloadAction<string>) => { // Add setSelectedDate action
       state.selectedDate = action.payload;
     },
@@ -39,5 +44,5 @@ const preferencesSlice = createSlice({
   },
 });
 
-export const { setSelectedServices, setSelectedLocation, setSelectedDate, setSelectedTime } = preferencesSlice.actions;
+export const { setSelectedServices, setSelectedLocation, setAddressd, setSelectedDate, setSelectedTime } = preferencesSlice.actions;
 export default preferencesSlice.reducer;

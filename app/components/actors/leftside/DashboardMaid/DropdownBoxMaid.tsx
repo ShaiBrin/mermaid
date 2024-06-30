@@ -9,7 +9,7 @@ import { RootState } from '@/app/store';
 
 
 const DropdownBoxMaid = () => {
-  const { services, locations, selectedServices, selectedLocation, selectedDate, selectedTime } = useSelector((state: RootState) => state.preferences);
+  const { services, locations, selectedServices, selectedLocation } = useSelector((state: RootState) => state.preferences);
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -32,6 +32,22 @@ const DropdownBoxMaid = () => {
         <Box p={2} sx={{ border: '2px solid #ccc', borderRadius: '10px' }}>
           <FormControl fullWidth margin="normal">
             <InputLabel id="location-select-label">Location</InputLabel>
+            <Select
+              labelId="location-select-label"
+              id="location-select"
+              value={selectedLocation}
+              label="Location"
+              onChange={handleLocationChange}
+            >
+              {locations.map((location, index) => (
+                <MenuItem key={index} value={location}>
+                  {location}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="location-select-label">Second Location</InputLabel>
             <Select
               labelId="location-select-label"
               id="location-select"

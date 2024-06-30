@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Typography, Box, Button } from '@mui/material';
 
-interface MaidModal {
+interface MaidDetails {
     firstname: string;
     lastname: string;
     rating: number;
@@ -11,7 +11,7 @@ interface MaidModal {
     onClose: () => void;
 }
 
-const MaidModal: React.FC<MaidModal> = ({ firstname, lastname, rating, price, experience, isOpen, onClose }) => {
+const MaidModal: React.FC<MaidDetails> = ({ firstname, lastname, rating, price, experience, isOpen, onClose }) => {
     return (
         <Modal
             open={isOpen}
