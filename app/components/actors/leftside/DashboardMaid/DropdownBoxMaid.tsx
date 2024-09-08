@@ -2,6 +2,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button } from '@mui/material';
+import PlaceIcon from '@mui/icons-material/Place';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation,setSelectedServices } from '@/app/store/preferencesSlice';
 import Link from 'next/link';
@@ -31,7 +33,12 @@ const DropdownBoxMaid = () => {
       <Grid item xs={12}>
         <Box p={2} sx={{ border: '2px solid #ccc', borderRadius: '10px' }}>
           <FormControl fullWidth margin="normal">
-            <InputLabel id="location-select-label">Location</InputLabel>
+            <InputLabel id="location-select-label">
+              <Box display="flex" alignItems="center">
+                <MyLocationIcon sx={{ mr: 1 }} /> {/* Icon for location */}
+                Location
+              </Box>
+            </InputLabel>
             <Select
               labelId="location-select-label"
               id="location-select"
@@ -47,7 +54,12 @@ const DropdownBoxMaid = () => {
             </Select>
           </FormControl>
           <FormControl fullWidth margin="normal">
-            <InputLabel id="location-select-label">Second Location</InputLabel>
+          <InputLabel id="location-select-label">
+              <Box display="flex" alignItems="center">
+                <PlaceIcon sx={{ mr: 1 }} /> {/* Icon for location */}
+                Second Location
+              </Box>
+            </InputLabel>
             <Select
               labelId="location-select-label"
               id="location-select"

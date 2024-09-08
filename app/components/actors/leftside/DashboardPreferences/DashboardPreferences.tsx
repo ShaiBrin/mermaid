@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime'; 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PlaceIcon from '@mui/icons-material/Place';
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation, setSelectedServices } from '@/app/store/preferencesSlice';
 import { format } from 'date-fns';
@@ -32,7 +33,12 @@ const DashboardPreferences = () => {
       <Grid item xs={12}>
         <Box p={2} sx={{ border: '2px solid #ccc', borderRadius: '10px' }}>
           <FormControl fullWidth margin="normal">
-            <InputLabel id="location-select-label">Location</InputLabel>
+          <InputLabel id="location-select-label">
+              <Box display="flex" alignItems="center">
+                <PlaceIcon sx={{ mr: 1 }}/> 
+                Location
+              </Box>
+            </InputLabel>
             <Select
               labelId="location-select-label"
               id="location-select"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { Box, Grid, TextField, Chip, useTheme, Button } from '@mui/material';
+import { Box, Grid, TextField, Chip, useTheme, Button, InputAdornment } from '@mui/material';
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import Autocomplete from '@mui/lab/Autocomplete';
 import MaidModal from '../MaidModal/MaidModal';
 import Link from 'next/link';
@@ -70,10 +71,19 @@ const DropDownChooseMaid: React.FC = () => {
                             <TextField
                                 {...params}
                                 variant="outlined"
-                                label="Choose Maid"
-                                placeholder="Type..."
+                                placeholder="Choose Maid"
                                 margin="normal"
+                                label="Choose Maid"
+                                InputProps={{
+                                    ...params.InputProps,
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <CleaningServicesIcon />
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
+
                         )}
                         renderTags={(value, getTagProps) =>
                             value.map((option, index) => (
