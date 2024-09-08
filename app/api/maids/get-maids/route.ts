@@ -5,4 +5,3 @@ export async function GET() {
   const maids = await sql`SELECT * FROM Maids;`;
   return NextResponse.json({ maids }, { status: 200 });
 }
-
