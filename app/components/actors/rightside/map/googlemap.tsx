@@ -1,5 +1,3 @@
-// MyGoogleMap.tsx
-
 import React from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,8 +11,8 @@ const defaultMapContainerStyle = {
 };
 
 const defaultMapCenter = {
-  lat: 35.8799866,
-  lng: 76.5048004,
+  lat: 45.5017, // Montreal latitude
+  lng: -73.5673, // Montreal longitude
 };
 
 const defaultMapZoom = 18;
