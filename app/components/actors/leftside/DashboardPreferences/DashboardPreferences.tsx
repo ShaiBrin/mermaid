@@ -35,7 +35,7 @@ const DashboardPreferences = () => {
           <FormControl fullWidth margin="normal">
           <InputLabel id="location-select-label">
               <Box display="flex" alignItems="center">
-                <PlaceIcon sx={{ mr: 1 }}/> 
+                <PlaceIcon sx={{ mr: 1 }} /> {/* Icon for location */}
                 Location
               </Box>
             </InputLabel>
