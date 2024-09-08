@@ -2,6 +2,8 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Box, FormControl, InputLabel, MenuItem, Select, Grid, TextField, Button } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime'; 
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { format, addDays } from 'date-fns';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,11 +12,32 @@ import { RootState } from '@/app/store';
 
 const generateTimeOptions = () => {
   const times = [];
-  for (let i = 0; i < 24 * 2; i++) {
-    const hour = Math.floor(i / 2);
+  
+  // Get the current time
+  const now = new Date();
+  const currentHour24 = now.getHours();
+  const currentMinutes = now.getMinutes();
+  
+  // Format current time for the "Now" option
+  const currentHour12 = currentHour24 % 12 === 0 ? 12 : currentHour24 % 12;
+  const currentPeriod = currentHour24 < 12 ? 'AM' : 'PM';
+  const currentTimeFormatted = `${currentHour12}:${currentMinutes < 10 ? '0' : ''}${currentMinutes} ${currentPeriod}`;
+
+  // Add "Now" option
+  times.push(`Now ${currentTimeFormatted}`);
+
+  // Generate time options in 30-minute intervals
+  for (let i = 0; i < 12 * 2; i++) {
+    const hour24 = Math.floor(i / 2);
     const minutes = i % 2 === 0 ? '00' : '30';
-    times.push(`${hour.toString().padStart(2, '0')}:${minutes}`);
+    
+    // Convert 24-hour time to 12-hour format
+    const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
+    const period = hour24 < 12 ? 'AM' : 'PM';
+    
+    times.push(`${hour12}:${minutes} ${period}`);
   }
+  
   return times;
 };
 
@@ -45,15 +68,24 @@ const DateTimePicker = () => {
               minDate={tomorrow}
               customInput={
                 <TextField 
-                  label={selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : "Today"} 
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <CalendarMonthIcon sx={{ mr: 1 }} /> {/* Icon for date picker */}
+                      {selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : "Today"}
+                    </Box>
+                  } 
                   variant="outlined" 
                 />
               }
             />
           </FormControl>
           <FormControl fullWidth sx={{ marginTop: 2 }}>
-            <InputLabel id="time-picker-label">{selectedTime ? "Time" : "Now"}</InputLabel>
-            <Select
+          <InputLabel id="time-picker-label">
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <AccessTimeIcon sx={{ mr: 1 }} /> {/* Icon for time picker */}
+                {selectedTime ? "Time" : "Now"}
+              </Box>
+            </InputLabel>            <Select
               labelId="time-picker-label"
               id="time-picker"
               value={selectedTime}

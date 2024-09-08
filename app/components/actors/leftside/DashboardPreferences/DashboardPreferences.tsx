@@ -2,6 +2,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime'; 
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation, setSelectedServices } from '@/app/store/preferencesSlice';
 import { format } from 'date-fns';
@@ -78,12 +80,18 @@ const DashboardPreferences = () => {
           <FormControl fullWidth margin="normal">
             <InputLabel shrink>Date and Time</InputLabel>
             <Box display="flex" flexDirection="column" border="1px solid rgba(0, 0, 0, 0.23)" borderRadius="4px" padding="8px">
-              <Box display="flex" justifyContent="space-between" paddingBottom="4px">
-                <span>Date:</span>
+              <Box display="flex" alignItems="center" justifyContent="space-between" paddingBottom="4px">
+                <Box display="flex" alignItems="center">
+                  <CalendarMonthIcon sx={{ mr: 1 }} /> {/* Icon for date */}
+                  <span>Date:</span>
+                </Box>
                 <span>{selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : 'N/A'}</span>
               </Box>
-              <Box display="flex" justifyContent="space-between">
-                <span>Time:</span>
+              <Box display="flex" alignItems="center" justifyContent="space-between">
+                <Box display="flex" alignItems="center">
+                  <AccessTimeIcon sx={{ mr: 1 }} /> {/* Icon for time */}
+                  <span>Time:</span>
+                </Box>
                 <span>{selectedTime || 'N/A'}</span>
               </Box>
             </Box>
