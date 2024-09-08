@@ -22,18 +22,18 @@ const DropDownChooseMaid: React.FC = () => {
     useEffect(() => {
         const fetchMaids = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/api/get-maids`);
+                const res = await fetch(`http://localhost:3000/api/maids/get-maids`);
                 if (!res.ok) {
                     throw new Error('Failed to fetch maids');
                 }
                 const data = await res.json();
                 if (data && data.maids && Array.isArray(data.maids.rows)) {
                     const maidDetails = data.maids.rows.map((maid: any) => ({
-                        firstname: maid.firstname,
-                        lastname: maid.lastname,
+                        firstname: maid.first_name,
+                        lastname: maid.last_name,
                         rating: maid.rating || 0,
                         price: maid.price || 0,
-                        experience: maid.experience || '',
+                        experience: maid.experience_level || '',
                     }));
                     setAutocompleteOptions(maidDetails);
                 } else {
