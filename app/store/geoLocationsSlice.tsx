@@ -16,8 +16,8 @@ interface GeoLocationsState {
 
 const initialState: GeoLocationsState = {
   clientGeoLocations: {
-    lat: 35.8799866,
-    lng: 76.5048004,
+    lat: 45.5017, // Montreal latitude
+    lng: -73.5673,
   },
   maidGeoLocations: {
     lat: 40.8799866,
