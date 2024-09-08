@@ -1,0 +1,237 @@
+[
+    {
+      "first_name": "Alice",
+      "last_name": "Smith",
+      "phone_number": "555-1234",
+      "email": "alice.smith@example.com",
+      "experience_level": "Expert",
+      "rating": 4.8,
+      "price": 25.00,
+      "availability": {
+        "Monday": ["09:00-12:00", "14:00-17:00"],
+        "Tuesday": ["09:00-12:00"],
+        "Wednesday": ["13:00-17:00"],
+        "Thursday": ["09:00-12:00", "15:00-18:00"],
+        "Friday": ["09:00-17:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Bob",
+      "last_name": "Johnson",
+      "phone_number": "555-5678",
+      "email": "bob.johnson@example.com",
+      "experience_level": "Intermediate",
+      "rating": 4.5,
+      "price": 20.00,
+      "availability": {
+        "Monday": ["10:00-14:00"],
+        "Tuesday": ["09:00-12:00", "14:00-16:00"],
+        "Wednesday": ["09:00-17:00"],
+        "Thursday": ["10:00-12:00"],
+        "Friday": ["13:00-17:00"],
+        "Saturday": ["09:00-12:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Carla",
+      "last_name": "Davis",
+      "phone_number": "555-8765",
+      "email": "carla.davis@example.com",
+      "experience_level": "Beginner",
+      "rating": 4.0,
+      "price": 18.00,
+      "availability": {
+        "Monday": ["09:00-11:00"],
+        "Tuesday": ["10:00-15:00"],
+        "Wednesday": ["09:00-12:00", "14:00-16:00"],
+        "Thursday": ["10:00-12:00"],
+        "Friday": ["09:00-11:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Daniel",
+      "last_name": "Wilson",
+      "phone_number": "555-3456",
+      "email": "daniel.wilson@example.com",
+      "experience_level": "Expert",
+      "rating": 4.9,
+      "price": 30.00,
+      "availability": {
+        "Monday": ["08:00-12:00", "13:00-17:00"],
+        "Tuesday": ["09:00-12:00"],
+        "Wednesday": ["10:00-16:00"],
+        "Thursday": ["09:00-17:00"],
+        "Friday": ["09:00-12:00"],
+        "Saturday": ["09:00-15:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Eva",
+      "last_name": "Martinez",
+      "phone_number": "555-6543",
+      "email": "eva.martinez@example.com",
+      "experience_level": "Intermediate",
+      "rating": 4.3,
+      "price": 22.00,
+      "availability": {
+        "Monday": ["09:00-13:00"],
+        "Tuesday": ["10:00-12:00", "14:00-16:00"],
+        "Wednesday": ["09:00-12:00"],
+        "Thursday": ["13:00-17:00"],
+        "Friday": ["09:00-11:00", "14:00-16:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Frank",
+      "last_name": "Brown",
+      "phone_number": "555-2345",
+      "email": "frank.brown@example.com",
+      "experience_level": "Expert",
+      "rating": 4.7,
+      "price": 28.00,
+      "availability": {
+        "Monday": ["09:00-12:00"],
+        "Tuesday": ["10:00-15:00"],
+        "Wednesday": ["09:00-12:00", "14:00-17:00"],
+        "Thursday": ["09:00-11:00"],
+        "Friday": ["13:00-17:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Grace",
+      "last_name": "Lee",
+      "phone_number": "555-9876",
+      "email": "grace.lee@example.com",
+      "experience_level": "Beginner",
+      "rating": 3.9,
+      "price": 16.00,
+      "availability": {
+        "Monday": ["10:00-12:00"],
+        "Tuesday": ["09:00-12:00"],
+        "Wednesday": ["09:00-11:00", "13:00-15:00"],
+        "Thursday": ["10:00-12:00"],
+        "Friday": ["09:00-12:00"],
+        "Saturday": ["Closed"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Hannah",
+      "last_name": "Taylor",
+      "phone_number": "555-4567",
+      "email": "hannah.taylor@example.com",
+      "experience_level": "Intermediate",
+      "rating": 4.4,
+      "price": 21.00,
+      "availability": {
+        "Monday": ["09:00-13:00"],
+        "Tuesday": ["10:00-14:00"],
+        "Wednesday": ["09:00-12:00"],
+        "Thursday": ["10:00-14:00"],
+        "Friday": ["09:00-13:00"],
+        "Saturday": ["Closed"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Ian",
+      "last_name": "Anderson",
+      "phone_number": "555-6789",
+      "email": "ian.anderson@example.com",
+      "experience_level": "Expert",
+      "rating": 4.6,
+      "price": 27.00,
+      "availability": {
+        "Monday": ["08:00-12:00"],
+        "Tuesday": ["09:00-12:00", "14:00-17:00"],
+        "Wednesday": ["09:00-11:00", "13:00-16:00"],
+        "Thursday": ["09:00-17:00"],
+        "Friday": ["09:00-12:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Jenna",
+      "last_name": "Wright",
+      "phone_number": "555-3457",
+      "email": "jenna.wright@example.com",
+      "experience_level": "Beginner",
+      "rating": 4.2,
+      "price": 19.00,
+      "availability": {
+        "Monday": ["09:00-12:00"],
+        "Tuesday": ["10:00-13:00"],
+        "Wednesday": ["Closed"],
+        "Thursday": ["10:00-12:00"],
+        "Friday": ["09:00-12:00", "14:00-16:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Kyle",
+      "last_name": "Harris",
+      "phone_number": "555-2346",
+      "email": "kyle.harris@example.com",
+      "experience_level": "Intermediate",
+      "rating": 4.1,
+      "price": 22.00,
+      "availability": {
+        "Monday": ["09:00-12:00"],
+        "Tuesday": ["09:00-13:00", "15:00-17:00"],
+        "Wednesday": ["10:00-14:00"],
+        "Thursday": ["09:00-12:00", "14:00-16:00"],
+        "Friday": ["10:00-13:00"],
+        "Saturday": ["09:00-12:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Laura",
+      "last_name": "King",
+      "phone_number": "555-8764",
+      "email": "laura.king@example.com",
+      "experience_level": "Expert",
+      "rating": 4.8,
+      "price": 26.00,
+      "availability": {
+        "Monday": ["09:00-11:00", "13:00-17:00"],
+        "Tuesday": ["10:00-14:00"],
+        "Wednesday": ["09:00-12:00"],
+        "Thursday": ["Closed"],
+        "Friday": ["09:00-11:00", "13:00-16:00"],
+        "Saturday": ["10:00-14:00"],
+        "Sunday": ["Closed"]
+      }
+    },
+    {
+      "first_name": "Michael",
+      "last_name": "Scott",
+      "phone_number": "555-5679",
+      "email": "michael.scott@example.com",
+      "experience_level": "Intermediate",
+      "rating": 4.0,
+      "price": 20.00,
+      "availability": {
+        "Monday": ["09:00-12:00", "14:00-17:00"],
+        "Tuesday": ["10:00-12:00"],
+        "Wednesday": ["09:00-13:00"],
+        "Thursday": ["09:00-11:00", "13:00-15:00"],
+        "Friday": ["10:00-14:00"],
+        "Saturday": ["09:00-12:00"],
+        "Sunday": ["Closed"]
+      }
+    }
+  ]
+  

@@ -4,17 +4,13 @@ import { NextResponse } from 'next/server';
 export async function GET(request: Request) {
   try {
     const result = await sql`
-      CREATE TABLE Maids (
+      CREATE TABLE Availabilities (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        first_name VARCHAR(255) NOT NULL,
-        last_name VARCHAR(255) NOT NULL,
-        phone_number VARCHAR(20),
-        email VARCHAR(255) UNIQUE NOT NULL,
-        experience_level VARCHAR(255),
-        rating FLOAT,
-        price DECIMAL(10, 2),
-        availability JSONB,
-        location_id UUID REFERENCES Locations(id)
+        maid_id UUID REFERENCES Maids(id),
+        day_of_week INT CHECK (day_of_week BETWEEN 1 AND 7),
+        specific_date DATE, -- Optional for specific days
+        start_time TIME NOT NULL,
+        end_time TIME NOT NULL
       );
     `;
     return NextResponse.json({ result }, { status: 200 });
