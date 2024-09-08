@@ -1,22 +1,38 @@
-'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button } from '@mui/material';
 import PlaceIcon from '@mui/icons-material/Place';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import Autocomplete from '@mui/lab/Autocomplete';
-import { setSelectedLocation,setSelectedServices } from '@/app/store/preferencesSlice';
+import { setSelectedLocation, setSelectedServices } from '@/app/store/preferencesSlice';
 import Link from 'next/link';
 import { RootState } from '@/app/store';
 
-
 const DropdownBoxMaid = () => {
-  const { services, locations, selectedServices, selectedLocation } = useSelector((state: RootState) => state.preferences);
+  const { services, selectedServices, selectedLocation } = useSelector((state: RootState) => state.preferences);
   const dispatch = useDispatch();
-
   const theme = useTheme();
 
-  const handleAutocompleteChange =  (event: React.SyntheticEvent, newValue: string[]) => {
+  const [locations, setLocations] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/locations/get-location');
+        if (!res.ok) {
+          throw new Error('Failed to fetch locations');
+        }
+        const data = await res.json();
+        setLocations(data.locations);
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
+
+  const handleAutocompleteChange = (event: React.SyntheticEvent, newValue: string[]) => {
     dispatch(setSelectedServices(newValue));
   };
 
@@ -54,17 +70,17 @@ const DropdownBoxMaid = () => {
             </Select>
           </FormControl>
           <FormControl fullWidth margin="normal">
-          <InputLabel id="location-select-label">
+            <InputLabel id="second-location-select-label">
               <Box display="flex" alignItems="center">
-                <PlaceIcon sx={{ mr: 1 }} /> {/* Icon for location */}
+                <PlaceIcon sx={{ mr: 1 }} /> {/* Icon for second location */}
                 Second Location
               </Box>
             </InputLabel>
             <Select
-              labelId="location-select-label"
-              id="location-select"
+              labelId="second-location-select-label"
+              id="second-location-select"
               value={selectedLocation}
-              label="Location"
+              label="Second Location"
               onChange={handleLocationChange}
             >
               {locations.map((location, index) => (
@@ -92,9 +108,7 @@ const DropdownBoxMaid = () => {
             )}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
-                // eslint-disable-next-line react/jsx-key
                 <Chip
-                  // key={index}
                   {...getTagProps({ index })}
                   label={option}
                   onDelete={handleDeleteOption(option)}
@@ -107,7 +121,7 @@ const DropdownBoxMaid = () => {
           <Link href="/maid/pickup" passHref>
             <Button
               variant="outlined"
-              fullWidth sx={{ marginBottom: 2, marginTop: 2}}
+              fullWidth sx={{ marginBottom: 2, marginTop: 2 }}
             >
               Choose Date and Time
             </Button>
