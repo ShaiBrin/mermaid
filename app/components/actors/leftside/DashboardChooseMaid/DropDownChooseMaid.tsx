@@ -1,9 +1,9 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { Box, Grid, TextField, Chip, useTheme, Button, InputAdornment } from '@mui/material';
-import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
-import Autocomplete from '@mui/lab/Autocomplete';
-import MaidModal from '../MaidModal/MaidModal';
+import React, { useState, useEffect } from 'react';
+import {
+    Grid, Card, CardHeader, Avatar, Typography, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Rating
+} from '@mui/material';
 import Link from 'next/link';
+
 
 interface MaidDetails {
     firstname: string;
@@ -14,10 +14,9 @@ interface MaidDetails {
 }
 
 const DropDownChooseMaid: React.FC = () => {
-    const [autocompleteOptions, setAutocompleteOptions] = useState<MaidDetails[]>([]);
-    const [selectedOption, setSelectedOption] = useState<MaidDetails | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const theme = useTheme();
+    const [maids, setMaids] = useState<MaidDetails[]>([]);
+    const [selectedMaid, setSelectedMaid] = useState<MaidDetails | null>(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const fetchMaids = async () => {
@@ -35,7 +34,7 @@ const DropDownChooseMaid: React.FC = () => {
                         price: maid.price || 0,
                         experience: maid.experience_level || '',
                     }));
-                    setAutocompleteOptions(maidDetails);
+                    setMaids(maidDetails);
                 } else {
                     throw new Error('Invalid maids data structure');
                 }
@@ -47,78 +46,117 @@ const DropDownChooseMaid: React.FC = () => {
         fetchMaids();
     }, []);
 
-    const handleAutocompleteChange = (event: SyntheticEvent, newValue: MaidDetails | null) => {
-        setSelectedOption(newValue);
-        if (newValue) {
-            setIsModalOpen(true); // Open modal when a maid is selected
+    const handleCardClick = (maid: MaidDetails) => {
+        setSelectedMaid(maid);
+    };
+
+    const handleReserveClick = () => {
+        if (selectedMaid) {
+            setOpen(true);
         }
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false); // Close modal
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <Box p={2} sx={{ border: '1px solid #ccc', borderRadius: '4px' }}>
-                    <Autocomplete
-                        options={autocompleteOptions}
-                        getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
-                        onChange={handleAutocompleteChange}
-                        value={selectedOption}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                variant="outlined"
-                                placeholder="Choose Maid"
-                                margin="normal"
-                                label="Choose Maid"
-                                InputProps={{
-                                    ...params.InputProps,
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <CleaningServicesIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-
-                        )}
-                        renderTags={(value, getTagProps) =>
-                            value.map((option, index) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <Chip
-                                    {...getTagProps({ index })}
-                                    label={`${option.firstname} ${option.lastname}`}
-                                    color="primary"
-                                    sx={{ bgcolor: theme.palette.primary.light, margin: '2px' }}
-                                />
-                            ))
-                        }
-                    />
-                    <Link href="/maid/book" passHref>
-                        <Button
-                            variant="outlined"
-                            fullWidth
-                            sx={{ marginBottom: 2, marginTop: 2 }}
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh',
+                padding: 2, // Optional padding to prevent edge collision
+            }}
+        >
+            <Grid container spacing={1} sx={{ flexGrow: 1 }}>
+                {maids.map((maid, index) => (
+                    <Grid item key={index} xs={12}>
+                        <Card
+                            sx={{
+                                cursor: 'pointer',
+                                border: selectedMaid === maid ? '2px solid blue' : 'none',
+                                marginBottom: 0, // Minimal space between cards
+                                boxShadow: 'none', // Optional: remove card shadow if it contributes to the space
+                            }}
+                            onClick={() => handleCardClick(maid)}
                         >
-                            Reserve Maid
+                            <CardHeader
+                                avatar={
+                                    <Avatar
+                                        src="https://nextui.org/avatars/avatar-1.png"
+                                        alt={`${maid.firstname} ${maid.lastname}`}
+                                        sx={{ width: 56, height: 56 }}
+                                    />
+                                }
+                                title={
+                                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                                        <Typography variant="h6">{`${maid.firstname} ${maid.lastname}`}</Typography>
+                                        <Typography variant="h6">{`$${maid.price}`}</Typography>
+                                    </Box>
+                                }
+                                subheader={
+                                    <Box display="flex" alignItems="center">
+                                        <Typography variant="body2" color="textSecondary" sx={{ marginRight: 1 }}>
+                                            Rating:
+                                        </Typography>
+                                        <Rating value={maid.rating} precision={0.5} readOnly />
+                                    </Box>
+                                }
+                                sx={{ padding: 1 }} // Adjust padding inside CardHeader if needed
+                            />
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+
+            <Box
+                sx={{
+                    marginTop: 'auto',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    paddingTop: 2, // Add space if necessary
+                }}
+            >
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ width: '100%', maxWidth: '500px' }}
+                        onClick={handleReserveClick}
+                        disabled={!selectedMaid}
+                    >
+                        Reserve
+                    </Button>
+
+            </Box>
+
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Maid Reservation</DialogTitle>
+                <DialogContent>
+                    {selectedMaid && (
+                        <Box>
+                            <Typography variant="h6">
+                                {`${selectedMaid.firstname} ${selectedMaid.lastname}`}
+                            </Typography>
+                            <Typography variant="body1">{`Price: $${selectedMaid.price}`}</Typography>
+                            <Typography variant="body1">
+                                Rating:
+                                <Rating value={selectedMaid.rating} precision={0.5} readOnly sx={{ marginLeft: 1 }} />
+                            </Typography>
+                        </Box>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Link href="/maid/book" passHref>
+                        <Button onClick={handleClose} color="primary">
+                            Close
                         </Button>
                     </Link>
-                </Box>
-            </Grid>
-            {/* MaidDetailsModal component */}
-            <MaidModal
-                firstname={selectedOption?.firstname || ''}
-                lastname={selectedOption?.lastname || ''}
-                rating={selectedOption?.rating || 0}
-                price={selectedOption?.price || 0}
-                experience={selectedOption?.experience || ''}
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-            />
-        </Grid>
+
+                </DialogActions>
+            </Dialog>
+        </Box>
     );
 };
 
