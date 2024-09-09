@@ -1,20 +1,22 @@
+// components/DropdownBoxLocationServices.tsx
+
+'use client';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Chip, useTheme, Button } from '@mui/material';
-import PlaceIcon from '@mui/icons-material/Place';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import Autocomplete from '@mui/lab/Autocomplete';
 import { setSelectedLocation, setSelectedServices } from '@/app/store/preferencesSlice';
 import Link from 'next/link';
 import { RootState } from '@/app/store';
 
-const DropdownBoxMaid = () => {
+const DropdownBoxLocationServices = () => {
   const { services, selectedServices, selectedLocation } = useSelector((state: RootState) => state.preferences);
   const dispatch = useDispatch();
   const theme = useTheme();
 
   const [locations, setLocations] = useState<string[]>([]);
-
+  
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -69,27 +71,6 @@ const DropdownBoxMaid = () => {
               ))}
             </Select>
           </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="second-location-select-label">
-              <Box display="flex" alignItems="center">
-                <PlaceIcon sx={{ mr: 1 }} /> {/* Icon for second location */}
-                Second Location
-              </Box>
-            </InputLabel>
-            <Select
-              labelId="second-location-select-label"
-              id="second-location-select"
-              value={selectedLocation}
-              label="Second Location"
-              onChange={handleLocationChange}
-            >
-              {locations.map((location, index) => (
-                <MenuItem key={index} value={location}>
-                  {location}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
           <Autocomplete
             multiple
             options={services}
@@ -108,7 +89,6 @@ const DropdownBoxMaid = () => {
             )}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
-                // eslint-disable-next-line react/jsx-key
                 <Chip
                   {...getTagProps({ index })}
                   label={option}
@@ -122,7 +102,7 @@ const DropdownBoxMaid = () => {
           <Link href="/maid/pickup" passHref>
             <Button
               variant="outlined"
-              fullWidth sx={{ marginBottom: 2, marginTop: 2 }}
+              fullWidth sx={{ marginBottom: 2, marginTop: 2}}
             >
               Choose Date and Time
             </Button>
@@ -133,4 +113,4 @@ const DropdownBoxMaid = () => {
   );
 };
 
-export default DropdownBoxMaid;
+export default DropdownBoxLocationServices;
