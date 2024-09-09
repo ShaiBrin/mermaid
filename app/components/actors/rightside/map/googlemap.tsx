@@ -1,18 +1,16 @@
-import React from 'react';
+// components/MyGoogleMap.tsx
+
+import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectClientGeolocation } from '@/app/store/geoLocationsSlice';
 import { RootState } from '@/app/store';
 
+// Define your default map container style, zoom, and options
 const defaultMapContainerStyle = {
   width: '100%',
   height: '100vh',
   borderRadius: '15px 0px 0px 15px',
-};
-
-const defaultMapCenter = {
-  lat: 45.5017, // Montreal latitude
-  lng: -73.5673, // Montreal longitude
 };
 
 const defaultMapZoom = 18;
@@ -23,9 +21,24 @@ const defaultMapOptions = {
   gestureHandling: 'auto',
 };
 
+// Define your location coordinates (this should be based on a real geocoding solution)
+const locationCoordinates: { [key: string]: { lat: number, lng: number } } = {
+  'Montreal': { lat: 45.5017, lng: -73.5673 },
+  'Laval': { lat: 45.5882, lng: -73.7125 },
+  // Add other locations here
+};
+
 const MyGoogleMap = () => {
   const clientGeoLocations = useSelector((state: RootState) => state.geoLocations.clientGeoLocations);
+  const selectedLocation = useSelector((state: RootState) => state.preferences.selectedLocation);
   const dispatch = useDispatch();
+
+  const [mapCenter, setMapCenter] = useState({ lat: 45.5017, lng: -73.5673 }); // Default to Montreal
+
+  useEffect(() => {
+    // Update map center based on selected location
+    setMapCenter(locationCoordinates[selectedLocation] || mapCenter);
+  }, [selectedLocation]);
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (event.latLng) {
@@ -39,15 +52,14 @@ const MyGoogleMap = () => {
     <div className="w-full">
       <GoogleMap
         mapContainerStyle={defaultMapContainerStyle}
-        center={{ lat: clientGeoLocations.lat || defaultMapCenter.lat, lng: clientGeoLocations.lng || defaultMapCenter.lng }}
+        center={mapCenter}
         zoom={defaultMapZoom}
         options={defaultMapOptions}
         onClick={handleMapClick}
       >
-        {/* Render marker for selected location */}
         <Marker
-          position={{ lat: clientGeoLocations.lat || defaultMapCenter.lat, lng: clientGeoLocations.lng || defaultMapCenter.lng }}
-          draggable={true} // Optional: Allow marker to be dragged
+          position={mapCenter}
+          draggable={true}
           onDragEnd={(e) => {
             if (e.latLng) {
               dispatch(
