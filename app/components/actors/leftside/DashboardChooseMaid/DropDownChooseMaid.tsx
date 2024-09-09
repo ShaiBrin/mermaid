@@ -147,14 +147,21 @@ const DropDownChooseMaid: React.FC = () => {
                         </Box>
                     )}
                 </DialogContent>
-                <DialogActions>
+                <DialogActions
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between', // Align buttons on the left and right
+                    }}
+                >
+                    <Button onClick={handleClose} color="primary">
+                        Close
+                    </Button>
                     <Link href="/maid/book" passHref>
-                        <Button onClick={handleClose} color="primary">
-                            Close
+                        <Button color="primary">
+                            Confirm
                         </Button>
                     </Link>
-
-                </DialogActions>
+                </DialogActions>    
             </Dialog>
         </Box>
     );
