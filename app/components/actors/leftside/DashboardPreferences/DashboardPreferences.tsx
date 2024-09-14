@@ -91,7 +91,8 @@ const DashboardPreferences = () => {
                   <CalendarMonthIcon sx={{ mr: 1 }} /> {/* Icon for date */}
                   <span>Date:</span>
                 </Box>
-                <span>{selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : 'N/A'}</span>
+                <span>{selectedDate  ? format(new Date(selectedDate), 'EEEE, dd\'th\' MMM'): 'N/A'}
+                </span>
               </Box>
               <Box display="flex" alignItems="center" justifyContent="space-between">
                 <Box display="flex" alignItems="center">
