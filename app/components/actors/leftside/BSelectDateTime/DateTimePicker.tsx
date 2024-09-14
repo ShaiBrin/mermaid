@@ -12,32 +12,38 @@ import { RootState } from '@/app/store';
 
 const generateTimeOptions = () => {
   const times = [];
-  
-  // Get the current time
+
   const now = new Date();
   const currentHour24 = now.getHours();
   const currentMinutes = now.getMinutes();
-  
-  // Format current time for the "Now" option
+
   const currentHour12 = currentHour24 % 12 === 0 ? 12 : currentHour24 % 12;
   const currentPeriod = currentHour24 < 12 ? 'AM' : 'PM';
   const currentTimeFormatted = `${currentHour12}:${currentMinutes < 10 ? '0' : ''}${currentMinutes} ${currentPeriod}`;
 
-  // Add "Now" option
   times.push(`Now ${currentTimeFormatted}`);
 
-  // Generate time options in 30-minute intervals
-  for (let i = 0; i < 12 * 2; i++) {
-    const hour24 = Math.floor(i / 2);
-    const minutes = i % 2 === 0 ? '00' : '30';
-    
-    // Convert 24-hour time to 12-hour format
-    const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
-    const period = hour24 < 12 ? 'AM' : 'PM';
-    
-    times.push(`${hour12}:${minutes} ${period}`);
+  let nextHour24 = currentHour24;
+  let nextMinutes = currentMinutes < 30 ? 30 : 0;
+
+  if (currentMinutes >= 30) {
+    nextHour24 += 1;
   }
-  
+
+  while (nextHour24 < 24 || (nextHour24 === 23 && nextMinutes <= 30)) {
+    const hour12 = nextHour24 % 12 === 0 ? 12 : nextHour24 % 12;
+    const period = nextHour24 < 12 ? 'AM' : 'PM';
+    const timeFormatted = `${hour12}:${nextMinutes === 0 ? '00' : '30'} ${period}`;
+
+    times.push(timeFormatted);
+
+    nextMinutes += 30;
+    if (nextMinutes === 60) {
+      nextMinutes = 0;
+      nextHour24 += 1;
+    }
+  }
+
   return times;
 };
 
@@ -45,11 +51,11 @@ const DateTimePicker = () => {
   const dispatch = useDispatch();
   const { selectedDate, selectedTime } = useSelector((state: RootState) => state.preferences);
   const timeOptions = generateTimeOptions();
-  const tomorrow = addDays(new Date(), 1); // Set minDate to tomorrow
+  const tomorrow = addDays(new Date(), 1);
 
   const handleDateChange = (date: Date | null) => {
     if (date) {
-      dispatch(setSelectedDate(date.toISOString())); // Store the date as an ISO string in Redux state
+      dispatch(setSelectedDate(date.toISOString()));
     }
   };
 
@@ -63,14 +69,14 @@ const DateTimePicker = () => {
         <Box p={2} sx={{ border: '2px solid #ccc', borderRadius: '10px' }}>
           <FormControl fullWidth>
             <DatePicker
-              selected={selectedDate ? new Date(selectedDate) : null} // Convert the string back to a Date object
+              selected={selectedDate ? new Date(selectedDate) : null}
               onChange={handleDateChange}
               minDate={tomorrow}
               customInput={
                 <TextField 
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <CalendarMonthIcon sx={{ mr: 1 }} /> {/* Icon for date picker */}
+                      <CalendarMonthIcon sx={{ mr: 1 }} />
                       {selectedDate ? format(new Date(selectedDate), 'yyyy/MM/dd') : "Today"}
                     </Box>
                   } 
@@ -80,17 +86,35 @@ const DateTimePicker = () => {
             />
           </FormControl>
           <FormControl fullWidth sx={{ marginTop: 2 }}>
-          <InputLabel id="time-picker-label">
+            <InputLabel id="time-picker-label">
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <AccessTimeIcon sx={{ mr: 1 }} /> {/* Icon for time picker */}
+                <AccessTimeIcon sx={{ mr: 1 }} />
                 {selectedTime ? "Time" : "Now"}
               </Box>
-            </InputLabel>            <Select
+            </InputLabel>
+            <Select
               labelId="time-picker-label"
               id="time-picker"
               value={selectedTime}
               onChange={handleTimeChange}
               variant="outlined"
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    maxHeight: 300, // Limit dropdown height
+                  },
+                },
+                // This ensures the dropdown scrolls to the selected time
+                autoFocus: false,
+                onEntering: (menuElement: HTMLElement) => {
+                  const selectedIndex = timeOptions.findIndex(time => time === selectedTime);
+                  if (selectedIndex !== -1) {
+                    const optionHeight = 48; // Approximate height of each option
+                    const offset = optionHeight * selectedIndex;
+                    menuElement.scrollTop = offset;
+                  }
+                }
+              }}
             >
               {timeOptions.map((time, index) => (
                 <MenuItem key={index} value={time}>
