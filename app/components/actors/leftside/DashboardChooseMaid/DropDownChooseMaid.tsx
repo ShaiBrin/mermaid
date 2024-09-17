@@ -154,7 +154,7 @@ const DropDownChooseMaid: React.FC = () => {
                     }}
                 >
                     <Button onClick={handleClose} color="primary">
-                        Close
+                        Cancel
                     </Button>
                     <Link href="/maid/book" passHref>
                         <Button color="primary">
