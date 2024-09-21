@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Button from "./Button";
 import CleaningServices from "@mui/icons-material/CleaningServices";
 
-const Logo = () => {
+const HomePageButton = () => {
   //update the size of the logo when the size of the screen changes
   const [width, setWidth] = useState(0);
 
@@ -44,10 +42,9 @@ const Logo = () => {
           display: showButton ? "block" : "none",
         }}
       >
-        <Button />
       </div>
     </>
   );
 };
 
-export default Logo;
+export default HomePageButton;
