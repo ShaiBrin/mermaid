@@ -106,13 +106,15 @@ const DateTimePicker = () => {
                 },
                 // This ensures the dropdown scrolls to the selected time
                 autoFocus: false,
-                onEntering: (menuElement: HTMLElement) => {
-                  const selectedIndex = timeOptions.findIndex(time => time === selectedTime);
-                  if (selectedIndex !== -1) {
-                    const optionHeight = 48; // Approximate height of each option
-                    const offset = optionHeight * selectedIndex;
-                    menuElement.scrollTop = offset;
-                  }
+                TransitionProps: {
+                  onEntering: (menuElement: HTMLElement) => {
+                    const selectedIndex = timeOptions.findIndex(time => time === selectedTime);
+                    if (selectedIndex !== -1) {
+                      const optionHeight = 48; // Approximate height of each option
+                      const offset = optionHeight * selectedIndex;
+                      menuElement.scrollTop = offset;
+                    }
+                  },
                 }
               }}
             >
