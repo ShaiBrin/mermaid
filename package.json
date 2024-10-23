@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "@vercel/postgres": "^0.8.0",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "next": "14.2.10",
     "pnpm": "^9.4.0",
     "prisma": "^5.16.0",
