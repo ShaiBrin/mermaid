@@ -1,26 +1,29 @@
-//Since the map will be laoded and displayed on client side
 'use client';
 
-// Import necessary modules and functions from external libraries and our own project
+import { useEffect, useState } from 'react';
 import { Libraries, useJsApiLoader } from '@react-google-maps/api';
 import { ReactNode } from 'react';
 
-// Define a list of libraries to load from the Google Maps API
-const libraries = ['places', 'drawing', 'geometry'];
+const libraries: Libraries = ['places', 'drawing', 'geometry'];
 
-// Define a function component called MapProvider that takes a children prop
 export function MapProvider({ children }: { children: ReactNode }) {
+  const [isClient, setIsClient] = useState(false);
 
-  // Load the Google Maps JavaScript API asynchronously
+  // Ensures the component only renders on the client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API as string,
-    libraries: libraries as Libraries,
+    libraries: libraries,
   });
 
-  if(loadError) return <p>Encountered error while loading google maps</p>
+  if (!isClient) return null; // Prevent server-side rendering of this component
 
-  if(!scriptLoaded) return <p>Map Script is loading ...</p>
+  if (loadError) return <p>Encountered error while loading google maps</p>;
 
-  // Return the children prop wrapped by this MapProvider component
-  return children;
+  if (!scriptLoaded) return <p>Map Script is loading...</p>;
+
+  return <>{children}</>;
 }

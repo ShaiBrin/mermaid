@@ -1,12 +1,9 @@
-// components/MyGoogleMap.tsx
-
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectClientGeolocation } from '@/app/store/geoLocationsSlice';
 import { RootState } from '@/app/store';
 
-// Define your default map container style, zoom, and options
 const defaultMapContainerStyle = {
   width: '100%',
   height: '100vh',
@@ -21,7 +18,6 @@ const defaultMapOptions = {
   gestureHandling: 'auto',
 };
 
-// Define your location coordinates (this should be based on a real geocoding solution)
 const locationCoordinates: { [key: string]: { lat: number, lng: number } } = {
   'Montreal': { lat: 45.5017, lng: -73.5673 },
   'Laval': { lat: 45.5882, lng: -73.7125 },
@@ -29,7 +25,6 @@ const locationCoordinates: { [key: string]: { lat: number, lng: number } } = {
 };
 
 const MyGoogleMap = () => {
-  const clientGeoLocations = useSelector((state: RootState) => state.geoLocations.clientGeoLocations);
   const selectedLocation = useSelector((state: RootState) => state.preferences.selectedLocation);
   const dispatch = useDispatch();
 
@@ -37,7 +32,7 @@ const MyGoogleMap = () => {
 
   useEffect(() => {
     // Update map center based on selected location
-    setMapCenter(locationCoordinates[selectedLocation] || mapCenter);
+    setMapCenter((prevCenter) => locationCoordinates[selectedLocation] || prevCenter);
   }, [selectedLocation]);
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
