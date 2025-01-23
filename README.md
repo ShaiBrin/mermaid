@@ -13,6 +13,7 @@ pnpm dev
 # or
 bun dev
 ```
+Open [mermaid.ca](https://mermaid-nu.vercel.app/) with your browser to see the result.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
